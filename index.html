@@ -1,808 +1,585 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Gustavo Santos Analytics | Gestão Estratégica Orientada a Dados</title>
-  <meta name="description" content="Consultoria em BI & Analytics. Apoio empresas na transição para uma cultura orientada a dados, com engenharia de dados, governança e dashboards que viram rotina de gestão.">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Gustavo Santos Analytics | Tomada de decisão baseada em dados</title>
+  <meta name="description" content="Consultoria em BI & Analytics. Engenharia de dados, Power BI, governança e dashboards executivos para decisões melhores." />
 
   <style>
     :root{
       --bg:#0B0F14;
-      --surface:#111827;
-      --text:#E5E7EB;
-      --muted:#9CA3AF;
-      --gold:#D6B25E;
-      --gold-2:#C9A227;
-      --line:rgba(255,255,255,.08);
-      --shadow: 0 18px 55px rgba(0,0,0,.55);
-      --radius: 18px;
-      --max: 1120px;
+      --bg2:#0A0D12;
+      --surface: rgba(255,255,255,.04);
+      --surface2: rgba(255,255,255,.06);
+      --border: rgba(255,255,255,.10);
+      --text:#E9EEF7;
+      --muted:#B6C2D3;
+      --muted2:#93A3B8;
+      --accent:#F6C453; /* dourado suave (se quiser laranja depois eu troco) */
+      --shadow: 0 18px 60px rgba(0,0,0,.55);
+      --radius: 22px;
+      --radius2: 16px;
+      --max: 1180px;
     }
-    *{box-sizing:border-box}
-    html,body{height:100%}
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Helvetica Neue", "Noto Sans", "Liberation Sans", sans-serif;
-      background: radial-gradient(1200px 600px at 15% 10%, rgba(214,178,94,.10), transparent 60%),
-                  radial-gradient(900px 520px at 80% 20%, rgba(201,162,39,.08), transparent 58%),
-                  var(--bg);
+      background: radial-gradient(1200px 700px at 20% 0%, rgba(246,196,83,.10), transparent 55%),
+                  radial-gradient(900px 600px at 90% 10%, rgba(255,255,255,.06), transparent 50%),
+                  linear-gradient(180deg, var(--bg), var(--bg2));
       color:var(--text);
       overflow-x:hidden;
     }
-    a{color:inherit; text-decoration:none}
-    .container{max-width:var(--max); margin:0 auto; padding:0 22px}
+    a{ color:inherit; text-decoration:none; }
+    .container{ width: min(var(--max), calc(100% - 48px)); margin: 0 auto; }
 
-    /* --- subtle particles --- */
-    .particles{
-      position:fixed; inset:0;
-      pointer-events:none;
-      opacity:.22;
-      background-image:
-        radial-gradient(circle at 10% 20%, rgba(255,255,255,.25) 0 2px, transparent 3px),
-        radial-gradient(circle at 30% 70%, rgba(214,178,94,.30) 0 2px, transparent 3px),
-        radial-gradient(circle at 70% 35%, rgba(255,255,255,.22) 0 1px, transparent 2px),
-        radial-gradient(circle at 85% 65%, rgba(201,162,39,.25) 0 2px, transparent 3px);
-      background-size: 520px 520px, 620px 620px, 460px 460px, 700px 700px;
-      animation: floatbg 14s linear infinite;
-      filter: blur(.2px);
-    }
-    @keyframes floatbg{
-      0%{transform:translate3d(0,0,0)}
-      50%{transform:translate3d(-20px, 14px,0)}
-      100%{transform:translate3d(0,0,0)}
-    }
-
-    /* --- header --- */
-    header{
-      position:fixed; top:0; left:0; right:0; z-index:50;
-      backdrop-filter: blur(10px);
-      background: linear-gradient(to bottom, rgba(11,15,20,.78), rgba(11,15,20,.18));
-      border-bottom:1px solid rgba(255,255,255,.06);
-    }
+    /* NAV */
     .nav{
-      display:flex; align-items:center; justify-content:space-between;
-      height:68px;
+      position: sticky; top:0; z-index: 50;
+      backdrop-filter: blur(14px);
+      background: rgba(10,13,18,.72);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .nav-inner{
+      height:74px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
     }
     .brand{
       display:flex; align-items:center; gap:12px;
-      min-width:190px;
+      min-width: 240px;
     }
-    .brand-badge{
-      width:44px; height:44px; border-radius:14px;
-      display:grid; place-items:center;
-      background: rgba(255,255,255,.04);
-      border:1px solid rgba(255,255,255,.08);
-      box-shadow: 0 10px 30px rgba(0,0,0,.28);
-      overflow:hidden;
+    .brand img{ height:34px; width:auto; display:block; }
+    .brand .t{
+      display:flex; flex-direction:column; line-height:1.1;
     }
-    .brand-badge img{
-      width:100%; height:100%; object-fit:cover;
-    }
-    .brand-title{
-      font-weight:650; letter-spacing:.2px;
-      line-height:1.1;
+    .brand .t strong{ font-size:14px; letter-spacing:.2px; }
+    .brand .t span{ font-size:12px; color:var(--muted2); margin-top:4px; }
+
+    .menu{
+      display:flex; align-items:center; gap:24px;
+      color: rgba(233,238,247,.85);
       font-size:14px;
+      white-space:nowrap;
     }
-    .brand-sub{color:var(--muted); font-size:12px; margin-top:2px}
-    nav ul{
-      list-style:none; display:flex; gap:26px; padding:0; margin:0;
-      align-items:center;
-    }
-    nav a{
-      color:rgba(229,231,235,.9);
-      font-size:14px;
-      padding:10px 6px;
-      position:relative;
-    }
-    nav a:after{
-      content:"";
-      position:absolute; left:6px; right:6px; bottom:4px;
-      height:2px; border-radius:2px;
-      background: linear-gradient(90deg, transparent, var(--gold), transparent);
-      opacity:0;
-      transform:translateY(3px);
-      transition:.25s ease;
-    }
-    nav a:hover:after{opacity:1; transform:translateY(0)}
-    .nav-cta{
-      display:flex; gap:10px; align-items:center;
+    .menu a{ opacity:.85; }
+    .menu a:hover{ opacity:1; }
+
+    .cta{
+      display:flex; align-items:center; gap:10px;
     }
     .btn{
-      border-radius:14px;
-      padding:10px 14px;
-      font-size:14px;
-      border:1px solid rgba(255,255,255,.10);
+      display:inline-flex; align-items:center; justify-content:center;
+      height:40px; padding:0 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
       background: rgba(255,255,255,.04);
-      color:rgba(229,231,235,.92);
-      transition:.2s ease;
-      display:inline-flex; align-items:center; gap:8px;
+      color: var(--text);
+      font-size: 14px;
+      gap:8px;
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
       cursor:pointer;
     }
-    .btn:hover{transform:translateY(-1px); background:rgba(255,255,255,.06)}
-    .btn-primary{
-      background: linear-gradient(180deg, rgba(214,178,94,.95), rgba(201,162,39,.95));
-      color:#0B0F14;
-      border-color: rgba(214,178,94,.55);
+    .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.20); }
+    .btn.primary{
+      background: rgba(246,196,83,.92);
+      border-color: rgba(246,196,83,1);
+      color:#17130A;
+      font-weight:650;
     }
-    .btn-primary:hover{filter:brightness(1.02)}
-    .btn-outline{
-      border-color: rgba(214,178,94,.30);
-      background: rgba(214,178,94,.06);
-      color: rgba(229,231,235,.96);
-    }
+    .btn.primary:hover{ background: rgba(246,196,83,1); }
 
-    /* --- hero --- */
+    /* HERO */
     .hero{
       position:relative;
-      min-height: 94vh;
-      padding-top: 88px;
-      display:flex;
-      align-items:center;
-      border-bottom: 1px solid rgba(255,255,255,.06);
+      padding: 64px 0 40px;
     }
     .hero-bg{
       position:absolute; inset:0;
-      background:
-        radial-gradient(950px 420px at 15% 35%, rgba(0,0,0,.05), rgba(0,0,0,.75)),
-        linear-gradient(to bottom, rgba(11,15,20,.35), rgba(11,15,20,.92)),
-        url("hero.png");
-      background-size: cover;
-      background-position: center;
-      filter:saturate(1.05) contrast(1.04);
-      transform: translateZ(0);
+      background: url("hero.png") center/cover no-repeat;
+      opacity:.33;
+      filter: saturate(1.05) contrast(1.05);
     }
-    .hero:before{
+    .hero::before{
       content:"";
       position:absolute; inset:0;
-      background: radial-gradient(600px 260px at 24% 42%, rgba(214,178,94,.10), transparent 55%);
-      pointer-events:none;
+      background: radial-gradient(900px 520px at 20% 10%, rgba(0,0,0,.35), rgba(0,0,0,.78) 60%),
+                  linear-gradient(180deg, rgba(0,0,0,.45), rgba(0,0,0,.82));
     }
-    .hero-content{
+    .hero-inner{
       position:relative;
-      z-index:2;
-      width:100%;
-      padding: 58px 0 44px;
-    }
-    .hero-grid{
       display:grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap: 28px;
-      align-items:center;
+      grid-template-columns: 1.2fr .9fr;
+      gap: 26px;
+      align-items: center;
+      min-height: 520px;
+      padding: 18px 0;
     }
     .kicker{
-      color: rgba(214,178,94,.9);
-      letter-spacing:.16em;
-      text-transform:uppercase;
-      font-size:12px;
-      margin-bottom:10px;
+      display:inline-flex; align-items:center; gap:10px;
+      color: rgba(246,196,83,.95);
+      font-size: 13px;
+      letter-spacing:.22em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
     }
-    h1{
-      font-size:48px;
-      line-height:1.05;
-      margin:0 0 10px 0;
-      letter-spacing:-.02em;
+    .h1{
+      font-size: clamp(36px, 4.2vw, 60px);
+      line-height: 1.02;
+      margin: 0 0 12px;
+      letter-spacing: -0.02em;
     }
-    .role{
-      font-size:22px;
-      color: rgba(214,178,94,.88);
-      margin-bottom: 18px;
+    .subtitle{
+      font-size: 18px;
+      color: rgba(246,196,83,.85);
+      margin: 0 0 14px;
     }
     .lead{
-      color: rgba(229,231,235,.86);
-      font-size:18px;
-      line-height:1.55;
-      max-width: 620px;
-      margin: 0 0 22px;
+      margin:0 0 18px;
+      color: rgba(233,238,247,.84);
+      font-size: 16px;
+      line-height: 1.65;
+      max-width: 58ch;
     }
-    .hero-actions{display:flex; gap:12px; flex-wrap:wrap; align-items:center}
-    .hero-badges{
-      display:flex; gap:10px; margin-top:22px; flex-wrap:wrap;
-    }
-    .badge{
-      font-size:12px;
-      padding:8px 10px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(17,24,39,.35);
-      backdrop-filter: blur(8px);
-      color: rgba(229,231,235,.86);
-    }
-    .badge strong{color:rgba(214,178,94,.95); font-weight:650}
-    .hero-right{
-      display:flex; justify-content:flex-end;
-    }
-    .hero-card{
-      width:100%;
-      max-width: 460px;
-      border-radius: var(--radius);
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(17,24,39,.40);
-      backdrop-filter: blur(10px);
-      box-shadow: var(--shadow);
-      padding:18px;
-    }
-    .hero-card-title{
-      font-weight:650;
-      font-size:14px;
-      color: rgba(229,231,235,.9);
-      margin-bottom: 10px;
-    }
-    .hero-card p{
-      margin:0;
-      color: rgba(229,231,235,.76);
-      font-size:13px;
-      line-height:1.55;
-    }
-
-    /* headline band */
-    .band{
-      margin-top: 26px;
-      padding: 18px 0 24px;
-      position:relative;
-    }
-    .band-inner{
-      border-radius: 20px;
-      background: rgba(0,0,0,.25);
-      border: 1px solid rgba(255,255,255,.08);
-      backdrop-filter: blur(10px);
-      padding: 18px 16px;
+    .hero-actions{
       display:flex;
-      justify-content:center;
-      align-items:center;
-      gap:10px;
-      text-align:center;
-      font-size: 30px;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      box-shadow: 0 18px 55px rgba(0,0,0,.35);
       flex-wrap:wrap;
+      gap:10px;
+      margin-top: 18px;
     }
-    .band-inner .gold{color: var(--gold)}
-    .spark{
-      width:14px; height:14px;
-      border-radius:4px;
-      background: linear-gradient(180deg, rgba(214,178,94,.95), rgba(201,162,39,.95));
-      transform: rotate(20deg);
-      box-shadow: 0 0 24px rgba(214,178,94,.25);
+    .chips{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top: 16px;
+    }
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.18);
+      font-size: 13px;
+      color: rgba(233,238,247,.86);
+    }
+    .chip b{ color: rgba(246,196,83,.95); }
+
+    .glass{
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(10,13,18,.55);
+      box-shadow: var(--shadow);
+      padding: 18px 18px;
+    }
+    .glass h3{
+      margin:0 0 10px;
+      font-size: 16px;
+      color: rgba(233,238,247,.92);
+    }
+    .glass p{
+      margin:0;
+      color: rgba(182,194,211,.92);
+      line-height: 1.6;
+      font-size: 14px;
     }
 
-    /* sections */
-    section{padding: 72px 0}
+    /* SECTIONS */
+    section{ padding: 72px 0; }
     .section-title{
-      font-size:28px;
-      margin:0 0 10px;
-      letter-spacing:-.02em;
+      font-size: 42px;
+      margin: 0 0 10px;
+      letter-spacing:-0.02em;
     }
     .section-sub{
-      color: rgba(229,231,235,.72);
-      margin:0 0 26px;
+      margin:0;
+      color: rgba(182,194,211,.92);
+      font-size: 18px;
       line-height:1.6;
-      max-width: 920px;
+      max-width: 85ch;
     }
 
-    /* trusted logos */
-    .trusted{
-      padding-top: 52px;
-      padding-bottom: 10px;
-    }
-    .logos{
+    /* Logos / Experiências */
+    .exp-head{
       display:flex;
-      gap: 26px;
+      flex-direction:column;
+      gap:12px;
+      margin-bottom: 26px;
+    }
+    .exp-kicker{
+      font-size: 18px;
+      color: rgba(182,194,211,.95);
+      letter-spacing:.02em;
+    }
+    .logos-row{
+      display:flex;
+      align-items:center;
+      gap: 14px;
       flex-wrap:wrap;
-      align-items:center;
-      opacity:.92;
     }
-    .logo-item{
-      height:42px;
+    .logo-pill{
+      height: 70px;                 /* >>> MAIOR */
+      padding: 14px 18px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.12);
       display:flex;
       align-items:center;
-      padding: 10px 12px;
-      border: 1px solid rgba(255,255,255,.08);
-      border-radius: 16px;
-      background: rgba(17,24,39,.28);
-      backdrop-filter: blur(10px);
+      justify-content:center;
+      min-width: 140px;
     }
-    .logo-item img{
-      height: 26px;
+    .logo-pill img{
+      height: 42px;                 /* >>> MAIOR */
       width:auto;
-      object-fit:contain;
-      filter: grayscale(1) brightness(1.05);
-      opacity:.92;
-      transition:.25s ease;
+      display:block;
+      filter: grayscale(100%);
+      opacity: .98;
     }
-    .logo-item:hover img{filter: grayscale(0) brightness(1.15); opacity:1}
 
-    /* services */
+    /* Cards */
     .grid-3{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 18px;
+      margin-top: 26px;
     }
     .card{
       border-radius: var(--radius);
       border: 1px solid rgba(255,255,255,.10);
-      background: rgba(17,24,39,.35);
-      backdrop-filter: blur(10px);
-      padding: 18px;
-      box-shadow: 0 18px 55px rgba(0,0,0,.22);
-      transition:.2s ease;
-      height:100%;
+      background: rgba(10,13,18,.62);
+      box-shadow: 0 12px 40px rgba(0,0,0,.35);
+      padding: 18px 18px 16px;
+      overflow:hidden;
+      position:relative;
+      min-height: 190px;
     }
-    .card:hover{transform:translateY(-2px); border-color: rgba(214,178,94,.22)}
-    .card h3{margin:10px 0 8px; font-size:18px}
-    .card p{margin:0; color: rgba(229,231,235,.75); line-height:1.6}
-    .icon{
-      width:44px;height:44px;border-radius:14px;
-      background: rgba(214,178,94,.08);
-      border: 1px solid rgba(214,178,94,.20);
-      display:grid; place-items:center;
-      color: var(--gold);
+    .card::before{
+      content:"";
+      position:absolute;
+      inset:-2px -2px auto -2px;
+      height: 88px;
+      background: radial-gradient(420px 180px at 25% 20%, rgba(246,196,83,.14), transparent 60%);
+      pointer-events:none;
+    }
+    .badge-num{
+      width: 46px; height:46px;
+      border-radius: 14px;
+      display:flex; align-items:center; justify-content:center;
       font-weight:800;
+      color: rgba(246,196,83,.95);
+      background: rgba(246,196,83,.08);
+      border: 1px solid rgba(246,196,83,.16);
+      margin-bottom: 14px;
+    }
+    .card h4{
+      margin: 0 0 8px;
+      font-size: 20px;
+      letter-spacing:-0.01em;
+    }
+    .card p{
+      margin:0;
+      color: rgba(182,194,211,.92);
+      line-height: 1.65;
+      font-size: 15px;
     }
 
-    /* portfolio */
-    .portfolio .card h3{margin-top:0}
-    .bullets{margin:10px 0 0; padding-left: 18px; color: rgba(229,231,235,.78)}
-    .bullets li{margin:6px 0}
-    .card-actions{margin-top:14px; display:flex; gap:10px; flex-wrap:wrap}
+    /* Projects */
+    .projects{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      margin-top: 22px;
+    }
+    .proj{
+      display:flex;
+      gap: 14px;
+      align-items:flex-start;
+      padding: 16px 16px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+    }
+    .proj .dot{
+      width: 10px; height:10px;
+      margin-top: 7px;
+      border-radius: 999px;
+      background: rgba(246,196,83,.95);
+      box-shadow: 0 0 0 6px rgba(246,196,83,.10);
+      flex: 0 0 auto;
+    }
+    .proj h5{ margin:0 0 6px; font-size: 16px; }
+    .proj p{ margin:0; color: rgba(182,194,211,.92); line-height:1.6; }
 
-    /* about */
-    .about-grid{
+    /* Contact */
+    .contact-wrap{
+      margin-top: 22px;
       display:grid;
       grid-template-columns: 1.2fr .8fr;
       gap: 18px;
-      align-items:start;
+      align-items:stretch;
     }
-    .pill{
-      border-radius:999px;
-      padding:10px 12px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(17,24,39,.30);
-      color: rgba(229,231,235,.80);
-      display:inline-flex;
-      gap:8px;
-      align-items:center;
-      margin: 6px 8px 0 0;
-      font-size:13px;
+    .contact-card{
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(10,13,18,.62);
+      padding: 18px;
+      box-shadow: 0 14px 55px rgba(0,0,0,.40);
     }
-    .pill b{color: rgba(214,178,94,.95)}
-    .list{
-      margin: 10px 0 0;
-      padding-left: 18px;
-      color: rgba(229,231,235,.78);
-      line-height:1.7;
-    }
+    .contact-card h4{ margin:0 0 10px; }
+    .contact-card p{ margin:0 0 14px; color: rgba(182,194,211,.92); line-height:1.65; }
+    .contact-actions{ display:flex; gap:10px; flex-wrap:wrap; }
 
-    /* contact */
-    .contact-grid{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
-      align-items: start;
+    /* Footer */
+    footer{
+      padding: 28px 0 36px;
+      border-top: 1px solid rgba(255,255,255,.08);
+      color: rgba(182,194,211,.85);
+      background: rgba(0,0,0,.15);
     }
-    .contact-links a{
+    .foot{
       display:flex;
       align-items:center;
       justify-content:space-between;
-      padding: 14px 14px;
-      border-radius: 16px;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(17,24,39,.30);
-      margin-bottom: 10px;
-      transition:.2s ease;
-    }
-    .contact-links a:hover{transform:translateY(-1px); border-color: rgba(214,178,94,.22)}
-    .contact-links span{color: rgba(229,231,235,.82)}
-    .contact-links small{color: rgba(156,163,175,.92)}
-    form{
-      border-radius: var(--radius);
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(17,24,39,.30);
-      padding: 18px;
-      backdrop-filter: blur(10px);
-    }
-    label{display:block; font-size:12px; color: rgba(156,163,175,.92); margin:12px 0 6px}
-    input, textarea{
-      width:100%;
-      padding: 12px 12px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(11,15,20,.55);
-      color: var(--text);
-      outline:none;
-    }
-    textarea{min-height:120px; resize:vertical}
-    input:focus, textarea:focus{border-color: rgba(214,178,94,.30)}
-    .form-actions{margin-top: 12px; display:flex; gap:10px; flex-wrap:wrap}
-
-    footer{
-      padding: 28px 0 44px;
-      border-top: 1px solid rgba(255,255,255,.06);
-      color: rgba(156,163,175,.9);
+      gap: 12px;
+      flex-wrap:wrap;
       font-size: 13px;
     }
-    .footer-row{
-      display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap;
-    }
-    .footer-row img{height:26px; width:auto; opacity:.95}
 
-    /* mobile */
-    .hamb{display:none}
-    @media (max-width: 940px){
-      .hero-grid{grid-template-columns:1fr}
-      .hero-right{justify-content:flex-start}
-      h1{font-size:40px}
-      .band-inner{font-size:24px}
-      .grid-3{grid-template-columns:1fr}
-      .about-grid{grid-template-columns:1fr}
-      .contact-grid{grid-template-columns:1fr}
-      nav ul{display:none}
-      .hamb{display:inline-flex}
-      .nav-cta{gap:8px}
-      .brand{min-width:auto}
-    }
-    /* mobile menu */
-    .mobile-menu{
-      display:none;
-      padding: 10px 0 16px;
-    }
-    .mobile-menu.open{display:block}
-    .mobile-menu a{
-      display:block;
-      padding: 12px 8px;
-      border-top:1px solid rgba(255,255,255,.06);
-      color: rgba(229,231,235,.92);
+    /* Responsive */
+    @media (max-width: 980px){
+      .hero-inner{ grid-template-columns: 1fr; min-height: auto; }
+      .brand{ min-width: auto; }
+      .menu{ display:none; } /* simples: some menu no mobile */
+      .grid-3{ grid-template-columns: 1fr; }
+      .contact-wrap{ grid-template-columns: 1fr; }
     }
   </style>
 </head>
 
 <body>
-  <div class="particles"></div>
-
-  <header>
+  <!-- NAV -->
+  <div class="nav">
     <div class="container">
-      <div class="nav">
-        <a class="brand" href="#home" aria-label="Ir para Home">
-          <div class="brand-badge" title="Gustavo Santos Analytics">
-            <img src="logo-gsa-white.png" alt="Logo Gustavo Santos Analytics">
-          </div>
-          <div>
-            <div class="brand-title">Gustavo Santos Analytics</div>
-            <div class="brand-sub">BI • Analytics • Engenharia de Dados</div>
+      <div class="nav-inner">
+        <a class="brand" href="#topo">
+          <img src="logo-gsa-white.png" alt="Gustavo Santos Analytics" />
+          <div class="t">
+            <strong>Gustavo Santos Analytics</strong>
+            <span>BI • Analytics • Engenharia de Dados</span>
           </div>
         </a>
 
-        <nav aria-label="Menu principal">
-          <ul>
-            <li><a href="#sobre">Sobre</a></li>
-            <li><a href="#habilidades">Habilidades</a></li>
-            <li><a href="#portfolio">Projetos</a></li>
-            <li><a href="#contato">Contato</a></li>
-          </ul>
+        <nav class="menu" aria-label="Navegação">
+          <a href="#sobre">Sobre</a>
+          <a href="#habilidades">Habilidades</a>
+          <a href="#projetos">Projetos</a>
+          <a href="#contato">Contato</a>
         </nav>
 
-        <div class="nav-cta">
-          <a class="btn btn-outline" href="https://bit.ly/gsa-linkedin" target="_blank" rel="noreferrer">LinkedIn</a>
-          <a class="btn btn-primary" href="https://wa.me/553171379432" target="_blank" rel="noreferrer">WhatsApp</a>
-          <button class="btn hamb" id="hamb" aria-label="Abrir menu">Menu</button>
+        <div class="cta">
+          <!-- TROQUE OS LINKS AQUI -->
+          <a class="btn" href="https://www.linkedin.com/in/" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="btn primary" href="https://wa.me/55" target="_blank" rel="noopener">WhatsApp</a>
         </div>
       </div>
+    </div>
+  </div>
 
-      <div class="mobile-menu" id="mobileMenu">
-        <a href="#sobre">Sobre</a>
-        <a href="#habilidades">Habilidades</a>
-        <a href="#portfolio">Projetos</a>
-        <a href="#contato">Contato</a>
+  <!-- HERO -->
+  <header id="topo" class="hero">
+    <div class="hero-bg"></div>
+    <div class="container">
+      <div class="hero-inner">
+        <div>
+          <div class="kicker">GUSTAVO SANTOS</div>
+          <h1 class="h1">Consultor de BI &amp; Analytics</h1>
+          <div class="subtitle">Tomada de decisão baseada em dados</div>
+          <p class="lead">
+            Apoio empresas na transição para uma cultura orientada a dados,
+            substituindo a intuição por indicadores claros e soluções de Business Intelligence
+            integradas ao cotidiano operacional.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn primary" href="#projetos">Ver Projetos</a>
+            <a class="btn" href="#contato">Falar Comigo</a>
+            <!-- TROQUE O LINK -->
+            <a class="btn" href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a>
+          </div>
+
+          <div class="chips">
+            <span class="chip"><b>Data Analytics</b> Power BI • DAX • Storytelling • UX</span>
+            <span class="chip"><b>Data Engineering</b> SQL • Power Query • DW • APIs</span>
+            <span class="chip"><b>Advanced AI</b> Python • Predictive Analytics</span>
+            <span class="chip"><b>Governança</b> Star Schema • Dicionário • KPIs</span>
+          </div>
+        </div>
+
+        <div class="glass">
+          <h3>Metodologia de Implementação: Do Diagnóstico à Evolução Contínua</h3>
+          <p>
+            Mapeamento → Definição de KPIs → Engenharia de Dados → Visualização → Homologação → Ciclo de Melhoria.<br/>
+            Transformo a complexidade dos dados em clareza estratégica para a tomada de decisão.
+          </p>
+        </div>
       </div>
     </div>
   </header>
 
-  <main id="home">
-    <section class="hero">
-      <div class="hero-bg" role="img" aria-label="Imagem de fundo do site"></div>
-      <div class="container hero-content">
-        <div class="hero-grid">
+  <!-- SOBRE / EXPERIÊNCIAS -->
+  <section id="sobre">
+    <div class="container">
+      <div class="exp-head">
+        <div class="exp-kicker">Experiências e referências corporativas</div>
+
+        <!-- LOGOS: MAIORES e no local certo -->
+        <div class="logos-row">
+          <div class="logo-pill"><img src="bmg.png" alt="BMG" /></div>
+          <div class="logo-pill"><img src="gmt.png" alt="GMT" /></div>
+          <div class="logo-pill"><img src="crono.png" alt="Crono" /></div>
+        </div>
+      </div>
+
+      <h2 class="section-title">Sobre</h2>
+      <p class="section-sub">
+        Trabalho do diagnóstico à entrega: entendimento do negócio, estruturação e padronização de dados (ETL/ELT),
+        modelagem (relacional e dimensional), definição de KPIs e criação de dashboards executivos com foco em
+        clareza, adoção e impacto real.
+      </p>
+    </div>
+  </section>
+
+  <!-- HABILIDADES -->
+  <section id="habilidades">
+    <div class="container">
+      <h2 class="section-title">Habilidades</h2>
+      <p class="section-sub">
+        Da imersão estratégica à inteligência de dados: transformando a complexidade do negócio em ativos de decisão
+        fundamentados, consistentes e escaláveis.
+      </p>
+
+      <div class="grid-3">
+        <div class="card">
+          <div class="badge-num">01</div>
+          <h4>Imersão &amp; Diagnóstico Estratégico</h4>
+          <p>
+            Briefing técnico, mapeamento de dores e definição de métricas de sucesso.
+            Alinhamento do que é “decisão” e do que precisa ser medido.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="badge-num">02</div>
+          <h4>Engenharia &amp; Arquitetura de Dados</h4>
+          <p>
+            ETL/ELT, padronização, camada semântica e modelagem dimensional.
+            Estrutura pronta para escala e manutenção.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="badge-num">03</div>
+          <h4>Business Intelligence &amp; Adoção</h4>
+          <p>
+            Dashboards executivos com foco em usabilidade e storytelling.
+            Homologação, treinamento e evolução contínua.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJETOS -->
+  <section id="projetos">
+    <div class="container">
+      <h2 class="section-title">Projetos</h2>
+      <p class="section-sub">
+        Exemplos do tipo de entrega que faço. Se quiser, eu adiciono prints e links de demos aqui (Power BI / PDFs / vídeos).
+      </p>
+
+      <div class="projects">
+        <div class="proj">
+          <div class="dot"></div>
           <div>
-            <div class="kicker">GUSTAVO SANTOS</div>
-            <h1>Consultor de BI &amp; Analytics</h1>
-            <div class="role">Tomada de decisão baseada em dados</div>
-
-            <p class="lead">
-              Apoio empresas na transição para uma cultura orientada a dados, substituindo a intuição por indicadores claros e soluções de Business Intelligence integradas ao cotidiano operacional.
-            </p>
-
-            <div class="hero-actions">
-              <a class="btn btn-primary" href="#portfolio">Ver Projetos</a>
-              <a class="btn" href="https://wa.me/553171379432" target="_blank" rel="noreferrer">Falar Comigo</a>
-              <a class="btn" href="https://instagram.com/gustavosantosanalytics" target="_blank" rel="noreferrer">Instagram</a>
-            </div>
-
-            <div class="hero-badges" aria-label="Ferramentas e Conceitos">
-              <div class="badge"><strong>Data Analytics</strong> Power BI • DAX • Storytelling • UX</div>
-              <div class="badge"><strong>Data Engineering</strong> SQL • Power Query • DW • APIs</div>
-              <div class="badge"><strong>Advanced AI</strong> ML • Python • Predictive Analytics</div>
-              <div class="badge"><strong>Governança</strong> Star Schema • Dicionário • KPIs</div>
-            </div>
-          </div>
-
-          <div class="hero-right">
-            <div class="hero-card">
-              <div class="hero-card-title">Metodologia de Implementação: Do Diagnóstico à Evolução Contínua</div>
-              <p>
-                Mapeamento → Definição de KPIs → Engenharia de Dados → Visualização → Homologação → Ciclo de Melhoria.<br>
-                Transformamos a complexidade dos dados em clareza estratégica para a tomada de decisão.
-              </p>
-            </div>
+            <h5>Painéis Executivos (Power BI)</h5>
+            <p>KPIs, metas, comparativos, análises diagnósticas e visão de tendência com foco em decisão.</p>
           </div>
         </div>
 
-        <div class="band">
-          <div class="band-inner">
-            <span class="spark" aria-hidden="true"></span>
-            <span>Gestão Estratégica Orientada a</span>
-            <span class="gold">Dados</span>
-            <span style="color:rgba(229,231,235,.7); font-weight:600">(Data-Driven)</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="trusted">
-      <div class="container">
-        <p class="section-sub" style="margin-bottom:14px">Experiências e referências corporativas</p>
-        <div class="logos">
-          <div class="logo-item"><img src="bmg.png" alt="Grupo BMG"></div>
-          <div class="logo-item"><img src="gmt.png" alt="Grupo Maurício Toledo (GMT)"></div>
-          <div class="logo-item"><img src="crono.png" alt="Crono Engenheiros Consultores"></div>
-        </div>
-      </div>
-    </section>
-
-    <section id="habilidades">
-      <div class="container">
-        <h2 class="section-title">Habilidades</h2>
-        <p class="section-sub">
-          Da imersão estratégica à inteligência de dados: transformando a complexidade do negócio em ativos de decisão fundamentados, consistentes e escaláveis.
-        </p>
-
-        <div class="grid-3">
-          <div class="card">
-            <div class="icon">01</div>
-            <h3>Imersão &amp; Diagnóstico Estratégico</h3>
-            <p>
-              Briefing técnico para mapeamento de dores, definição de métricas de sucesso (KPIs) e alinhamento conceitual para garantir uma única fonte da verdade.
-            </p>
-          </div>
-
-          <div class="card">
-            <div class="icon">02</div>
-            <h3>Engenharia &amp; Arquitetura de Dados</h3>
-            <p>
-              Tratamento (ETL), padronização e estruturação lógica de dados com o rigor da engenharia.
-              Foco total na integridade técnica e escalabilidade da solução.
-            </p>
-          </div>
-
-          <div class="card">
-            <div class="icon">03</div>
-            <h3>Business Intelligence &amp; Adoção</h3>
-            <p>
-              Desenvolvimento de dashboards intuitivos com foco em usabilidade.
-              Entrega acompanhada de documentação e suporte para que o dado vire rotina de gestão.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="portfolio" class="portfolio">
-      <div class="container">
-        <h2 class="section-title">Novos Projetos: Vitrine de Soluções</h2>
-        <p class="section-sub">
-          Estudos de caso com foco executivo, engenharia de dados e governança — desenhados para virar rotina de decisão.
-        </p>
-
-        <div class="grid-3">
-          <div class="card">
-            <h3>01. Performance de Vendas &amp; Forecasting (Estratégico)</h3>
-            <p style="color:rgba(229,231,235,.78); margin:0 0 10px">
-              Visão executiva focada no crescimento e na previsibilidade de receita, unindo a visão de marketing à inteligência de dados.
-            </p>
-
-            <ul class="bullets">
-              <li><b>Métricas-Chave:</b> Receita, Margem de Contribuição, CAC e análise de Pareto (80/20).</li>
-              <li><b>Diferencial Técnico:</b> Implementação de cálculos em DAX para inteligência temporal e modelos de previsão (Forecasting).</li>
-              <li><b>Foco:</b> Identificação de gargalos comerciais e projeção de metas baseada em dados históricos.</li>
-            </ul>
-
-            <div class="card-actions">
-              <a class="btn btn-primary" href="https://app.powerbi.com/view?r=SUBSTITUA_SEU_LINK_AQUI_1" target="_blank" rel="noreferrer">Abrir Dashboard</a>
-            </div>
-          </div>
-
-          <div class="card">
-            <h3>02. Gestão Financeira &amp; Governança (Confiabilidade)</h3>
-            <p style="color:rgba(229,231,235,.78); margin:0 0 10px">
-              Um ecossistema financeiro automatizado que garante a “Única Fonte da Verdade” para o fluxo de caixa da empresa.
-            </p>
-
-            <ul class="bullets">
-              <li><b>Métricas-Chave:</b> EBITDA, DRE automatizada, Inadimplência e comparativo Budget vs. Actual.</li>
-              <li><b>Diferencial Técnico:</b> Modelagem robusta com SQL e Power Query, garantindo integridade dos saldos e conciliação bancária.</li>
-              <li><b>Foco:</b> Substituir o controle manual por monitoramento financeiro ágil e seguro.</li>
-            </ul>
-
-            <div class="card-actions">
-              <a class="btn btn-primary" href="https://app.powerbi.com/view?r=SUBSTITUA_SEU_LINK_AQUI_2" target="_blank" rel="noreferrer">Abrir Dashboard</a>
-            </div>
-          </div>
-
-          <div class="card">
-            <h3>03. Engenharia de Obras &amp; Produtividade (Especialidade)</h3>
-            <p style="color:rgba(229,231,235,.78); margin:0 0 10px">
-              Onde o rigor da engenharia civil se une ao Advanced Analytics para garantir eficiência no canteiro de obras.
-            </p>
-
-            <ul class="bullets">
-              <li><b>Métricas-Chave:</b> IDC (Custo), IDP (Prazo), Produtividade HH por serviço e gestão de desperdício.</li>
-              <li><b>Diferencial Técnico:</b> Aplicação de Earned Value Management (EVM) e comparação com bases de mercado (SINAPI/TCPO).</li>
-              <li><b>Foco:</b> Controle rigoroso de custos e produtividade para evitar estouros de orçamento.</li>
-            </ul>
-
-            <div class="card-actions">
-              <a class="btn btn-primary" href="https://app.powerbi.com/view?r=SUBSTITUA_SEU_LINK_AQUI_3" target="_blank" rel="noreferrer">Abrir Dashboard</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="sobre">
-      <div class="container">
-        <h2 class="section-title">Sobre</h2>
-        <p class="section-sub">
-          Atuo no desenvolvimento de soluções de Business Intelligence que convertem desafios operacionais em ativos de decisão.
-          Com uma trajetória multidisciplinar que une o rigor da engenharia à clareza estratégica da comunicação, entrego indicadores confiáveis e governança de dados para áreas complexas como Jurídico, Auditoria, Contabilidade e Engenharia.
-          Meu foco é garantir que cada painel seja uma ferramenta viva de gestão, sustentada por processos sólidos e uma visão prática de resultados.
-        </p>
-
-        <div class="about-grid">
-          <div class="card">
-            <h3 style="margin-top:0">O que você pode esperar</h3>
-            <ul class="list">
-              <li><b>Diagnóstico Estratégico:</b> Imersão profunda para entender o desafio real do negócio, entregando soluções que geram impacto, não apenas visualizações.</li>
-              <li><b>Integridade e Governança:</b> Construção de indicadores consistentes, com regras de cálculo homologadas e uma única fonte da verdade.</li>
-              <li><b>Fluxo de Valor Pragmático:</b> Processos ágeis estruturados para transformar dados brutos em insights acionáveis e decisões seguras.</li>
-              <li><b>Sustentabilidade do Projeto:</b> Entrega acompanhada de documentação técnica e funcional para garantir a continuidade e evolução das soluções.</li>
-            </ul>
-          </div>
-
+        <div class="proj">
+          <div class="dot"></div>
           <div>
-            <div class="pill"><b>Expertise Corporativa:</b> Consultoria em BI para grupos de grande porte.</div>
-            <div class="pill"><b>Alta Performance:</b> Estruturas de dados enxutas, rápidas e escaláveis.</div>
-            <div class="pill"><b>Engenharia de Dados:</b> ETL com SQL, Power Query e Python.</div>
-            <div class="pill"><b>Intelligence &amp; Analytics:</b> DAX avançado + integração com IA.</div>
+            <h5>Modelagem &amp; Governança</h5>
+            <p>Star schema, dicionário de dados, padronização de nomes e rastreabilidade de métricas.</p>
+          </div>
+        </div>
+
+        <div class="proj">
+          <div class="dot"></div>
+          <div>
+            <h5>ETL/ELT &amp; Integrações</h5>
+            <p>Power Query, SQL, APIs e pipelines para consolidar e confiar na “versão única da verdade”.</p>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="contato">
-      <div class="container">
-        <h2 class="section-title">Contato</h2>
-        <p class="section-sub">Pronto para transformar sua gestão com inteligência de dados? Vamos conversar.</p>
+  <!-- CONTATO -->
+  <section id="contato">
+    <div class="container">
+      <h2 class="section-title">Contato</h2>
+      <p class="section-sub">
+        Me diga rapidamente seu contexto (negócio, dados disponíveis e a decisão que você precisa tomar).
+        Eu respondo com uma proposta de caminho e próximos passos.
+      </p>
 
-        <div class="contact-grid">
-          <div class="contact-links">
-            <a href="https://wa.me/553171379432" target="_blank" rel="noreferrer">
-              <span>WhatsApp Business</span>
-              <small>wa.me/553171379432</small>
-            </a>
-            <a href="mailto:gustavo@coutosantos.com">
-              <span>Email</span>
-              <small>gustavo@coutosantos.com</small>
-            </a>
-            <a href="https://bit.ly/gsa-linkedin" target="_blank" rel="noreferrer">
-              <span>LinkedIn</span>
-              <small>bit.ly/gsa-linkedin</small>
-            </a>
-            <a href="https://instagram.com/gustavosantosanalytics" target="_blank" rel="noreferrer">
-              <span>Instagram</span>
-              <small>@gustavosantosanalytics</small>
-            </a>
-          </div>
-
-          <form id="contactForm">
-            <div style="display:flex; gap:12px; flex-wrap:wrap">
-              <div style="flex:1; min-width:220px">
-                <label for="nome">Nome</label>
-                <input id="nome" name="nome" placeholder="Seu nome" required="">
-              </div>
-              <div style="flex:1; min-width:220px">
-                <label for="email">Email</label>
-                <input id="email" name="email" type="email" placeholder="seu@email.com" required="">
-              </div>
-            </div>
-
-            <label for="mensagem">Mensagem</label>
-            <textarea id="mensagem" name="mensagem" placeholder="Conte rapidamente o seu desafio com dados..." required=""></textarea>
-
-            <div class="form-actions">
-              <button class="btn btn-primary" type="submit">Enviar Mensagem</button>
-              <a class="btn" href="https://wa.me/553171379432" target="_blank" rel="noreferrer">Preferir WhatsApp</a>
-            </div>
-
-            <p id="formStatus" style="margin:10px 0 0; color:rgba(156,163,175,.92); font-size:12px"></p>
-          </form>
-        </div>
-      </div>
-    </section>
-
-    <footer>
-      <div class="container">
-        <div class="footer-row">
-          <div style="display:flex; align-items:center; gap:10px">
-            <img src="logo-gsa-white.png" alt="Logo Gustavo Santos Analytics">
-            <span>© <span id="year">2026</span> Gustavo Santos Analytics</span>
-          </div>
-          <div style="display:flex; gap:14px; flex-wrap:wrap">
-            <a href="https://bit.ly/gsa-linkedin" target="_blank" rel="noreferrer">LinkedIn</a>
-            <a href="https://instagram.com/gustavosantosanalytics" target="_blank" rel="noreferrer">Instagram</a>
-            <a href="mailto:gustavo@coutosantos.com">Email</a>
-            <a href="https://wa.me/553171379432" target="_blank" rel="noreferrer">WhatsApp</a>
+      <div class="contact-wrap">
+        <div class="contact-card">
+          <h4>Vamos conversar</h4>
+          <p>
+            Se você quer montar indicadores confiáveis e um painel executivo (sem “números conflitantes”),
+            podemos começar por um diagnóstico rápido e objetivos claros.
+          </p>
+          <div class="contact-actions">
+            <!-- TROQUE OS LINKS AQUI -->
+            <a class="btn primary" href="https://wa.me/55" target="_blank" rel="noopener">WhatsApp</a>
+            <a class="btn" href="https://www.linkedin.com/in/" target="_blank" rel="noopener">LinkedIn</a>
+            <a class="btn" href="mailto:seuemail@dominio.com">E-mail</a>
           </div>
         </div>
+
+        <div class="contact-card">
+          <h4>Entrega típica</h4>
+          <p>
+            Diagnóstico → Modelagem/ETL → Dashboard (Power BI) → Homologação → Rotina de evolução.
+          </p>
+          <p style="color: rgba(182,194,211,.88); margin-top:10px;">
+            Se quiser, eu coloco aqui seus cases reais com imagens e descrições (BMG / etc.).
+          </p>
+        </div>
       </div>
-    </footer>
-  </main>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="foot">
+        <div>© <span id="year"></span> Gustavo Santos Analytics</div>
+        <div>Tomada de decisão baseada em dados</div>
+      </div>
+    </div>
+  </footer>
 
   <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    const hamb = document.getElementById('hamb');
-    const mobileMenu = document.getElementById('mobileMenu');
-    if (hamb) {
-      hamb.addEventListener('click', () => {
-        mobileMenu.classList.toggle('open');
-      });
-    }
-
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', (e) => {
-        const href = a.getAttribute('href');
-        if (!href || href === '#') return;
-        const target = document.querySelector(href);
-        if (!target) return;
-        e.preventDefault();
-        mobileMenu.classList.remove('open');
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      });
-    });
-
-    const form = document.getElementById('contactForm');
-    const statusEl = document.getElementById('formStatus');
-
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const nome = document.getElementById('nome').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const mensagem = document.getElementById('mensagem').value.trim();
-
-      if (!nome || !email || !mensagem) {
-        statusEl.textContent = 'Preencha todos os campos.';
-        return;
-      }
-
-      const subject = encodeURIComponent('Contato pelo site — Gustavo Santos Analytics');
-      const body = encodeURIComponent(
-        `Nome: ${nome}\nEmail: ${email}\n\nMensagem:\n${mensagem}\n`
-      );
-
-      window.location.href = `mailto:gustavo@coutosantos.com?subject=${subject}&body=${body}`;
-      statusEl.textContent = 'Abrindo seu email para envio...';
-      form.reset();
-    });
+    document.getElementById("year").textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
