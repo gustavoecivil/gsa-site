@@ -1,10 +1,10 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Gustavo Santos Analytics | Tomada de decisão baseada em dados</title>
-  <meta name="description" content="Organizo dados e implanto indicadores para decisões melhores. BI & Analytics, Power BI, ETL e governança enxuta para pequenas e médias empresas." />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Gustavo Santos Analytics | Gestão Estratégica Orientada a Dados</title>
+  <meta name="description" content="Consultoria em BI & Analytics. Apoio empresas na transição para uma cultura orientada a dados, com engenharia de dados, governança e dashboards que viram rotina de gestão.">
 
   <style>
     :root{
@@ -146,7 +146,7 @@
       background:
         radial-gradient(950px 420px at 15% 35%, rgba(0,0,0,.05), rgba(0,0,0,.75)),
         linear-gradient(to bottom, rgba(11,15,20,.35), rgba(11,15,20,.92)),
-        url("assets/hero.png");
+        url("hero.png");
       background-size: cover;
       background-position: center;
       filter:saturate(1.05) contrast(1.04);
@@ -192,7 +192,7 @@
       color: rgba(229,231,235,.86);
       font-size:18px;
       line-height:1.55;
-      max-width: 540px;
+      max-width: 620px;
       margin: 0 0 22px;
     }
     .hero-actions{display:flex; gap:12px; flex-wrap:wrap; align-items:center}
@@ -214,7 +214,7 @@
     }
     .hero-card{
       width:100%;
-      max-width: 420px;
+      max-width: 460px;
       border-radius: var(--radius);
       border:1px solid rgba(255,255,255,.10);
       background: rgba(17,24,39,.40);
@@ -252,10 +252,11 @@
       align-items:center;
       gap:10px;
       text-align:center;
-      font-size: 34px;
+      font-size: 30px;
       font-weight: 700;
       letter-spacing: -0.02em;
       box-shadow: 0 18px 55px rgba(0,0,0,.35);
+      flex-wrap:wrap;
     }
     .band-inner .gold{color: var(--gold)}
     .spark{
@@ -277,7 +278,7 @@
       color: rgba(229,231,235,.72);
       margin:0 0 26px;
       line-height:1.6;
-      max-width: 820px;
+      max-width: 920px;
     }
 
     /* trusted logos */
@@ -432,7 +433,7 @@
       .hero-grid{grid-template-columns:1fr}
       .hero-right{justify-content:flex-start}
       h1{font-size:40px}
-      .band-inner{font-size:28px}
+      .band-inner{font-size:24px}
       .grid-3{grid-template-columns:1fr}
       .about-grid{grid-template-columns:1fr}
       .contact-grid{grid-template-columns:1fr}
@@ -464,15 +465,11 @@
       <div class="nav">
         <a class="brand" href="#home" aria-label="Ir para Home">
           <div class="brand-badge" title="Gustavo Santos Analytics">
-            <!-- Opção 1: usar seu logo branco -->
-            <img src="assets/logo-gsa-white.png" alt="Logo Gustavo Santos Analytics" />
-
-            <!-- Opção 2 (se quiser): trocar por um monograma “GS” -->
-            <!-- <span style="font-weight:900;color:var(--gold);font-size:18px">GS</span> -->
+            <img src="logo-gsa-white.png" alt="Logo Gustavo Santos Analytics">
           </div>
           <div>
             <div class="brand-title">Gustavo Santos Analytics</div>
-            <div class="brand-sub">BI • Analytics • Indicadores</div>
+            <div class="brand-sub">BI • Analytics • Engenharia de Dados</div>
           </div>
         </a>
 
@@ -508,10 +505,11 @@
         <div class="hero-grid">
           <div>
             <div class="kicker">GUSTAVO SANTOS</div>
-            <h1>Consultor de BI & Analytics</h1>
-            <div class="role">Organizo dados e implanto indicadores para decisões melhores.</div>
+            <h1>Consultor de BI &amp; Analytics</h1>
+            <div class="role">Tomada de decisão baseada em dados</div>
+
             <p class="lead">
-              Ajudo pequenas e médias empresas a saírem do “achismo” com dados confiáveis, indicadores claros e painéis que viram rotina de gestão.
+              Apoio empresas na transição para uma cultura orientada a dados, substituindo a intuição por indicadores claros e soluções de Business Intelligence integradas ao cotidiano operacional.
             </p>
 
             <div class="hero-actions">
@@ -520,20 +518,20 @@
               <a class="btn" href="https://instagram.com/gustavosantosanalytics" target="_blank" rel="noreferrer">Instagram</a>
             </div>
 
-            <div class="hero-badges">
-              <div class="badge"><strong>BI</strong> Power BI</div>
-              <div class="badge"><strong>ETL</strong> Power Query / SQL</div>
-              <div class="badge"><strong>KPI</strong> Indicadores governados</div>
-              <div class="badge"><strong>Rotina</strong> Gestão por resultados</div>
+            <div class="hero-badges" aria-label="Ferramentas e Conceitos">
+              <div class="badge"><strong>Data Analytics</strong> Power BI • DAX • Storytelling • UX</div>
+              <div class="badge"><strong>Data Engineering</strong> SQL • Power Query • DW • APIs</div>
+              <div class="badge"><strong>Advanced AI</strong> ML • Python • Predictive Analytics</div>
+              <div class="badge"><strong>Governança</strong> Star Schema • Dicionário • KPIs</div>
             </div>
           </div>
 
           <div class="hero-right">
             <div class="hero-card">
-              <div class="hero-card-title">Entrega com método</div>
+              <div class="hero-card-title">Metodologia de Implementação: Do Diagnóstico à Evolução Contínua</div>
               <p>
-                Diagnóstico → Indicadores → Modelagem → Dashboard → Validação → Evolução.
-                Clareza para decisão, sem complicar o processo.
+                Mapeamento → Definição de KPIs → Engenharia de Dados → Visualização → Homologação → Ciclo de Melhoria.<br>
+                Transformamos a complexidade dos dados em clareza estratégica para a tomada de decisão.
               </p>
             </div>
           </div>
@@ -542,8 +540,9 @@
         <div class="band">
           <div class="band-inner">
             <span class="spark" aria-hidden="true"></span>
-            <span>Tomada de Decisão Baseada em</span>
-            <span class="gold">DADos</span>
+            <span>Gestão Estratégica Orientada a</span>
+            <span class="gold">Dados</span>
+            <span style="color:rgba(229,231,235,.7); font-weight:600">(Data-Driven)</span>
           </div>
         </div>
       </div>
@@ -551,11 +550,11 @@
 
     <section class="trusted">
       <div class="container">
-        <p class="section-sub" style="margin-bottom:14px">Experiências e referências</p>
+        <p class="section-sub" style="margin-bottom:14px">Experiências e referências corporativas</p>
         <div class="logos">
-          <div class="logo-item"><img src="assets/bmg.png" alt="Grupo BMG" /></div>
-          <div class="logo-item"><img src="assets/gmt.png" alt="Grupo Maurício Toledo (GMT)" /></div>
-          <div class="logo-item"><img src="assets/crono.png" alt="Crono Engenheiros Consultores" /></div>
+          <div class="logo-item"><img src="bmg.png" alt="Grupo BMG"></div>
+          <div class="logo-item"><img src="gmt.png" alt="Grupo Maurício Toledo (GMT)"></div>
+          <div class="logo-item"><img src="crono.png" alt="Crono Engenheiros Consultores"></div>
         </div>
       </div>
     </section>
@@ -564,24 +563,34 @@
       <div class="container">
         <h2 class="section-title">Habilidades</h2>
         <p class="section-sub">
-          Do entendimento do negócio até o painel final — com foco em consistência dos números e adoção pela equipe.
+          Da imersão estratégica à inteligência de dados: transformando a complexidade do negócio em ativos de decisão fundamentados, consistentes e escaláveis.
         </p>
 
         <div class="grid-3">
           <div class="card">
             <div class="icon">01</div>
-            <h3>Diagnóstico & KPIs</h3>
-            <p>Entendimento da necessidade, definição de métricas, dicionário e alinhamento conceitual.</p>
+            <h3>Imersão &amp; Diagnóstico Estratégico</h3>
+            <p>
+              Briefing técnico para mapeamento de dores, definição de métricas de sucesso (KPIs) e alinhamento conceitual para garantir uma única fonte da verdade.
+            </p>
           </div>
+
           <div class="card">
             <div class="icon">02</div>
-            <h3>ETL & Modelagem</h3>
-            <p>Tratamento, padronização e estrutura analítica (Power Query/SQL) para dados confiáveis.</p>
+            <h3>Engenharia &amp; Arquitetura de Dados</h3>
+            <p>
+              Tratamento (ETL), padronização e estruturação lógica de dados com o rigor da engenharia.
+              Foco total na integridade técnica e escalabilidade da solução.
+            </p>
           </div>
+
           <div class="card">
             <div class="icon">03</div>
-            <h3>Dashboards & Rotina</h3>
-            <p>Power BI com clareza visual, validação, documentação mínima e melhoria contínua.</p>
+            <h3>Business Intelligence &amp; Adoção</h3>
+            <p>
+              Desenvolvimento de dashboards intuitivos com foco em usabilidade.
+              Entrega acompanhada de documentação e suporte para que o dado vire rotina de gestão.
+            </p>
           </div>
         </div>
       </div>
@@ -589,52 +598,60 @@
 
     <section id="portfolio" class="portfolio">
       <div class="container">
-        <h2 class="section-title">Projetos</h2>
-        <p class="section-sub">Até 3 dashboards publicados (substitua os links abaixo pelos seus links reais do Power BI).</p>
+        <h2 class="section-title">Novos Projetos: Vitrine de Soluções</h2>
+        <p class="section-sub">
+          Estudos de caso com foco executivo, engenharia de dados e governança — desenhados para virar rotina de decisão.
+        </p>
 
         <div class="grid-3">
           <div class="card">
-            <h3>Dashboard de Facilities & Chamados</h3>
+            <h3>01. Performance de Vendas &amp; Forecasting (Estratégico)</h3>
             <p style="color:rgba(229,231,235,.78); margin:0 0 10px">
-              Centralização de operações e indicadores de atendimento.
+              Visão executiva focada no crescimento e na previsibilidade de receita, unindo a visão de marketing à inteligência de dados.
             </p>
+
             <ul class="bullets">
-              <li>Consolidação de bases e padronização de métricas</li>
-              <li>Visão de SLA, volumetria e performance</li>
-              <li>Painel executivo e recortes por área/equipe</li>
+              <li><b>Métricas-Chave:</b> Receita, Margem de Contribuição, CAC e análise de Pareto (80/20).</li>
+              <li><b>Diferencial Técnico:</b> Implementação de cálculos em DAX para inteligência temporal e modelos de previsão (Forecasting).</li>
+              <li><b>Foco:</b> Identificação de gargalos comerciais e projeção de metas baseada em dados históricos.</li>
             </ul>
+
             <div class="card-actions">
-              <a class="btn btn-primary" href="https://app.powerbi.com/view?r=PLACEHOLDER_1" target="_blank" rel="noreferrer">Abrir Dashboard</a>
+              <a class="btn btn-primary" href="https://app.powerbi.com/view?r=SUBSTITUA_SEU_LINK_AQUI_1" target="_blank" rel="noreferrer">Abrir Dashboard</a>
             </div>
           </div>
 
           <div class="card">
-            <h3>Painel de Não Conformidades</h3>
+            <h3>02. Gestão Financeira &amp; Governança (Confiabilidade)</h3>
             <p style="color:rgba(229,231,235,.78); margin:0 0 10px">
-              Gestão de riscos, auditorias e acompanhamento de planos de ação.
+              Um ecossistema financeiro automatizado que garante a “Única Fonte da Verdade” para o fluxo de caixa da empresa.
             </p>
+
             <ul class="bullets">
-              <li>Tratamento e modelagem dos dados (ETL)</li>
-              <li>Indicadores de criticidade, status e recorrência</li>
-              <li>Validação com áreas e ajustes pós-feedback</li>
+              <li><b>Métricas-Chave:</b> EBITDA, DRE automatizada, Inadimplência e comparativo Budget vs. Actual.</li>
+              <li><b>Diferencial Técnico:</b> Modelagem robusta com SQL e Power Query, garantindo integridade dos saldos e conciliação bancária.</li>
+              <li><b>Foco:</b> Substituir o controle manual por monitoramento financeiro ágil e seguro.</li>
             </ul>
+
             <div class="card-actions">
-              <a class="btn btn-primary" href="https://app.powerbi.com/view?r=PLACEHOLDER_2" target="_blank" rel="noreferrer">Abrir Dashboard</a>
+              <a class="btn btn-primary" href="https://app.powerbi.com/view?r=SUBSTITUA_SEU_LINK_AQUI_2" target="_blank" rel="noreferrer">Abrir Dashboard</a>
             </div>
           </div>
 
           <div class="card">
-            <h3>Gestão de Viagens (Facilities)</h3>
+            <h3>03. Engenharia de Obras &amp; Produtividade (Especialidade)</h3>
             <p style="color:rgba(229,231,235,.78); margin:0 0 10px">
-              Controle e análise de viagens corporativas e custos associados.
+              Onde o rigor da engenharia civil se une ao Advanced Analytics para garantir eficiência no canteiro de obras.
             </p>
+
             <ul class="bullets">
-              <li>Adequação da base ao modelo e estabilização do ETL</li>
-              <li>Revisão de medidas e validações por amostragem</li>
-              <li>Documentação e suporte à operação</li>
+              <li><b>Métricas-Chave:</b> IDC (Custo), IDP (Prazo), Produtividade HH por serviço e gestão de desperdício.</li>
+              <li><b>Diferencial Técnico:</b> Aplicação de Earned Value Management (EVM) e comparação com bases de mercado (SINAPI/TCPO).</li>
+              <li><b>Foco:</b> Controle rigoroso de custos e produtividade para evitar estouros de orçamento.</li>
             </ul>
+
             <div class="card-actions">
-              <a class="btn btn-primary" href="https://app.powerbi.com/view?r=PLACEHOLDER_3" target="_blank" rel="noreferrer">Abrir Dashboard</a>
+              <a class="btn btn-primary" href="https://app.powerbi.com/view?r=SUBSTITUA_SEU_LINK_AQUI_3" target="_blank" rel="noreferrer">Abrir Dashboard</a>
             </div>
           </div>
         </div>
@@ -645,28 +662,27 @@
       <div class="container">
         <h2 class="section-title">Sobre</h2>
         <p class="section-sub">
-          Atuo com BI e Analytics conectando necessidades de negócio a dados confiáveis e indicadores claros.
-          Experiência em múltiplas áreas (Facilities, Jurídico, Auditoria, Contabilidade, Contratos, Patrimônio, Help/Chamados, OKRs, clima organizacional e não conformidades),
-          com visão prática de processos e tomada de decisão.
+          Atuo no desenvolvimento de soluções de Business Intelligence que convertem desafios operacionais em ativos de decisão.
+          Com uma trajetória multidisciplinar que une o rigor da engenharia à clareza estratégica da comunicação, entrego indicadores confiáveis e governança de dados para áreas complexas como Jurídico, Auditoria, Contabilidade e Engenharia.
+          Meu foco é garantir que cada painel seja uma ferramenta viva de gestão, sustentada por processos sólidos e uma visão prática de resultados.
         </p>
 
         <div class="about-grid">
           <div class="card">
             <h3 style="margin-top:0">O que você pode esperar</h3>
             <ul class="list">
-              <li>Entendimento real do problema (sem “dashboard por dashboard”).</li>
-              <li>Indicadores consistentes, com definição e regra de cálculo claras.</li>
-              <li>Entrega enxuta e pragmática: dados → insight → decisão.</li>
-              <li>Documentação mínima para manter o trabalho vivo.</li>
+              <li><b>Diagnóstico Estratégico:</b> Imersão profunda para entender o desafio real do negócio, entregando soluções que geram impacto, não apenas visualizações.</li>
+              <li><b>Integridade e Governança:</b> Construção de indicadores consistentes, com regras de cálculo homologadas e uma única fonte da verdade.</li>
+              <li><b>Fluxo de Valor Pragmático:</b> Processos ágeis estruturados para transformar dados brutos em insights acionáveis e decisões seguras.</li>
+              <li><b>Sustentabilidade do Projeto:</b> Entrega acompanhada de documentação técnica e funcional para garantir a continuidade e evolução das soluções.</li>
             </ul>
           </div>
 
           <div>
-            <div class="pill"><b>3 anos</b> consultoria BI em grupo de grande porte</div>
-            <div class="pill"><b>PME</b> foco em estrutura enxuta e rápida</div>
-            <div class="pill"><b>ETL</b> Power Query / SQL</div>
-            <div class="pill"><b>BI</b> Power BI (modelagem + DAX)</div>
-            <div class="pill"><b>Rotina</b> gestão por resultados</div>
+            <div class="pill"><b>Expertise Corporativa:</b> Consultoria em BI para grupos de grande porte.</div>
+            <div class="pill"><b>Alta Performance:</b> Estruturas de dados enxutas, rápidas e escaláveis.</div>
+            <div class="pill"><b>Engenharia de Dados:</b> ETL com SQL, Power Query e Python.</div>
+            <div class="pill"><b>Intelligence &amp; Analytics:</b> DAX avançado + integração com IA.</div>
           </div>
         </div>
       </div>
@@ -675,7 +691,7 @@
     <section id="contato">
       <div class="container">
         <h2 class="section-title">Contato</h2>
-        <p class="section-sub">Se quiser, me chame no WhatsApp e eu te respondo rápido. Também estou no LinkedIn e Instagram.</p>
+        <p class="section-sub">Pronto para transformar sua gestão com inteligência de dados? Vamos conversar.</p>
 
         <div class="contact-grid">
           <div class="contact-links">
@@ -701,19 +717,19 @@
             <div style="display:flex; gap:12px; flex-wrap:wrap">
               <div style="flex:1; min-width:220px">
                 <label for="nome">Nome</label>
-                <input id="nome" name="nome" placeholder="Seu nome" required />
+                <input id="nome" name="nome" placeholder="Seu nome" required="">
               </div>
               <div style="flex:1; min-width:220px">
                 <label for="email">Email</label>
-                <input id="email" name="email" type="email" placeholder="seu@email.com" required />
+                <input id="email" name="email" type="email" placeholder="seu@email.com" required="">
               </div>
             </div>
 
             <label for="mensagem">Mensagem</label>
-            <textarea id="mensagem" name="mensagem" placeholder="Conte rapidamente o que você precisa..." required></textarea>
+            <textarea id="mensagem" name="mensagem" placeholder="Conte rapidamente o seu desafio com dados..." required=""></textarea>
 
             <div class="form-actions">
-              <button class="btn btn-primary" type="submit">Enviar</button>
+              <button class="btn btn-primary" type="submit">Enviar Mensagem</button>
               <a class="btn" href="https://wa.me/553171379432" target="_blank" rel="noreferrer">Preferir WhatsApp</a>
             </div>
 
@@ -727,8 +743,8 @@
       <div class="container">
         <div class="footer-row">
           <div style="display:flex; align-items:center; gap:10px">
-            <img src="assets/logo-gsa-white.png" alt="Logo Gustavo Santos Analytics" />
-            <span>© <span id="year"></span> Gustavo Santos Analytics</span>
+            <img src="logo-gsa-white.png" alt="Logo Gustavo Santos Analytics">
+            <span>© <span id="year">2026</span> Gustavo Santos Analytics</span>
           </div>
           <div style="display:flex; gap:14px; flex-wrap:wrap">
             <a href="https://bit.ly/gsa-linkedin" target="_blank" rel="noreferrer">LinkedIn</a>
@@ -742,10 +758,8 @@
   </main>
 
   <script>
-    // Ano no footer
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Menu mobile
     const hamb = document.getElementById('hamb');
     const mobileMenu = document.getElementById('mobileMenu');
     if (hamb) {
@@ -754,7 +768,6 @@
       });
     }
 
-    // Scroll suave
     document.querySelectorAll('a[href^="#"]').forEach(a => {
       a.addEventListener('click', (e) => {
         const href = a.getAttribute('href');
@@ -767,7 +780,6 @@
       });
     });
 
-    // Form (simples) - envia via mailto (sem backend)
     const form = document.getElementById('contactForm');
     const statusEl = document.getElementById('formStatus');
 
@@ -787,7 +799,6 @@
         `Nome: ${nome}\nEmail: ${email}\n\nMensagem:\n${mensagem}\n`
       );
 
-      // Abre o cliente de email do usuário
       window.location.href = `mailto:gustavo@coutosantos.com?subject=${subject}&body=${body}`;
       statusEl.textContent = 'Abrindo seu email para envio...';
       form.reset();
