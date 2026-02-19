@@ -4,87 +4,89 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Gustavo Santos Analytics</title>
-  <meta name="description" content="Consultoria em BI & Analytics — tomada de decisão baseada em dados." />
+  <meta name="description" content="Consultor de BI & Analytics — tomada de decisão baseada em dados." />
 
   <style>
     :root{
       --bg: #0b0f14;
-      --bg2:#0f1621;
-      --card: rgba(255,255,255,.06);
-      --stroke: rgba(255,255,255,.12);
       --text: rgba(255,255,255,.92);
-      --muted: rgba(255,255,255,.68);
+      --muted: rgba(255,255,255,.70);
+      --stroke: rgba(255,255,255,.12);
+      --card: rgba(0,0,0,.25);
       --accent:#FF6300;
-      --shadow: 0 16px 60px rgba(0,0,0,.45);
+      --max: 1180px;
       --radius: 18px;
-      --max: 1120px;
+      --shadow: 0 18px 60px rgba(0,0,0,.45);
     }
 
-    *{ box-sizing:border-box; }
+    *{ box-sizing: border-box; }
     html,body{ height:100%; }
     body{
       margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Helvetica Neue", Helvetica;
-      background: radial-gradient(1100px 600px at 20% 0%, rgba(255,99,0,.14), transparent 55%),
-                  radial-gradient(900px 600px at 70% 10%, rgba(66,133,244,.12), transparent 60%),
-                  linear-gradient(180deg, var(--bg), #070a0f);
       color:var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      background:
+        radial-gradient(1000px 600px at 20% 0%, rgba(255,99,0,.14), transparent 55%),
+        radial-gradient(900px 600px at 70% 10%, rgba(66,133,244,.10), transparent 60%),
+        linear-gradient(180deg, var(--bg), #070a0f);
+      overflow-x:hidden;
     }
 
     a{ color:inherit; text-decoration:none; }
-    .container{ width: min(var(--max), calc(100% - 48px)); margin:0 auto; }
+    .container{ width:min(var(--max), calc(100% - 48px)); margin:0 auto; }
 
-    /* ====== TOPO: LOGO FIXA ESQUERDA + NAV PILL DIREITA ====== */
-    .top-layer{
+    /* ========= TOPBAR (LOGO ESQUERDA + NAV DIREITA) ========= */
+    .topbar{
       position: fixed;
-      inset: 0 0 auto 0;
-      height: 96px;
-      z-index: 50;
-      pointer-events: none; /* importante: só logo/nav recebem click */
-    }
-    .top-inner{
-      height: 96px;
+      top: 18px;
+      left: 24px;
+      right: 24px;
+      z-index: 9999;
+
       display:flex;
-      align-items:flex-start;
+      align-items:center;
       justify-content:space-between;
-      padding-top: 18px;
+      gap: 14px;
+
+      pointer-events:none; /* só brand/nav clicáveis */
     }
 
-    /* LOGO: fica sempre no topo-esquerda */
     .brand{
-      pointer-events: auto;
+      pointer-events:auto;
       display:flex;
       align-items:center;
       gap:12px;
-      padding: 8px 10px;
+
+      padding: 10px 12px;
       border-radius: 14px;
+
+      background: rgba(0,0,0,.22);
+      border: 1px solid rgba(255,255,255,.10);
       backdrop-filter: blur(10px);
-      background: rgba(0,0,0,.18);
-      border: 1px solid rgba(255,255,255,.08);
       box-shadow: 0 10px 30px rgba(0,0,0,.35);
     }
     .brand img{
-      display:block;
-      height: 44px;       /* ajuste aqui o tamanho da logo */
+      height: 44px; /* tamanho da logo */
       width:auto;
+      display:block;
       object-fit:contain;
     }
 
-    /* NAV: pill deslocada para a direita (não ocupa a largura toda) */
     .nav-pill{
-      pointer-events: auto;
-      margin-left: auto;
-      transform: translateX(140px); /* <-- empurra a navegação para a direita (ajuste fino) */
+      pointer-events:auto;
       display:flex;
-      gap: 10px;
       align-items:center;
+      gap:10px;
+
       padding: 10px 12px;
       border-radius: 999px;
-      background: rgba(255,255,255,.06);
+
+      background: rgba(0,0,0,.28);
       border: 1px solid rgba(255,255,255,.12);
       backdrop-filter: blur(10px);
       box-shadow: var(--shadow);
     }
+
     .nav-pill a{
       font-size: 13px;
       color: var(--muted);
@@ -97,138 +99,155 @@
       color: var(--text);
       background: rgba(255,255,255,.07);
     }
+
+    .nav-pill .btn{
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+    }
+    .nav-pill .btn:hover{
+      background: rgba(255,255,255,.09);
+    }
     .nav-pill .cta{
-      color:#111;
       background: var(--accent);
-      border: 1px solid rgba(0,0,0,.12);
+      color: #111;
+      border: 1px solid rgba(0,0,0,.18);
     }
-    .nav-pill .cta:hover{
-      filter: brightness(1.03);
-    }
+    .nav-pill .cta:hover{ filter: brightness(1.04); }
 
-    /* Espaço no topo para não ficar nada “por baixo” da camada fixa */
-    .page{
-      padding-top: 110px;
-    }
+    /* Espaço para não ficar por baixo do topo fixo */
+    main{ padding-top: 120px; }
 
-    /* ====== HERO ====== */
+    /* ========= HERO ========= */
     .hero{
+      padding: 70px 0 40px;
       position: relative;
-      padding: 64px 0 34px;
     }
+
+    /* Background “banner” estilo seu print (troque por sua imagem se quiser) */
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:-120px -60px -60px -60px;
+      background:
+        linear-gradient(90deg, rgba(0,0,0,.62), rgba(0,0,0,.25)),
+        url("assets/hero.jpg") center/cover no-repeat;
+      filter: saturate(1.05) contrast(1.05);
+      z-index:-2;
+    }
+    .hero::after{
+      content:"";
+      position:absolute;
+      inset:-120px -60px -60px -60px;
+      background: radial-gradient(800px 500px at 15% 30%, rgba(0,0,0,.15), rgba(0,0,0,.70));
+      z-index:-1;
+    }
+
     .hero-grid{
       display:grid;
-      grid-template-columns: 1.25fr .75fr;
-      gap: 28px;
-      align-items: start;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 22px;
+      align-items:start;
     }
-    .kicker{
-      display:inline-flex;
-      gap:10px;
-      align-items:center;
-      padding: 8px 12px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.05);
-      border-radius: 999px;
-      color: var(--muted);
-      font-size: 13px;
-    }
-    .dot{
-      width:8px;height:8px;border-radius:99px;background: var(--accent);
-      box-shadow: 0 0 0 6px rgba(255,99,0,.15);
-    }
+
     h1{
-      margin: 18px 0 12px;
-      font-size: clamp(34px, 4.2vw, 54px);
+      margin: 0 0 10px;
+      font-size: clamp(34px, 4.4vw, 58px);
       line-height: 1.02;
       letter-spacing: -0.02em;
     }
-    .lead{
-      margin: 0 0 22px;
-      color: var(--muted);
-      font-size: 16px;
-      line-height: 1.6;
-      max-width: 54ch;
+    .sub{
+      margin: 0 0 14px;
+      color: rgba(255,255,255,.80);
+      max-width: 70ch;
+      line-height:1.6;
+      font-size: 15px;
     }
-    .hero-actions{ display:flex; gap: 12px; flex-wrap:wrap; }
-    .btn{
+
+    .highlight{
+      display:inline-block;
+      margin-top: 8px;
+      color: rgba(255,255,255,.85);
+      font-size: 13px;
+    }
+    .highlight b{ color: var(--accent); font-weight: 700; }
+
+    .actions{
+      display:flex;
+      gap: 10px;
+      flex-wrap:wrap;
+      margin-top: 18px;
+    }
+
+    .btn2{
       display:inline-flex;
       align-items:center;
       justify-content:center;
       gap:10px;
       padding: 12px 16px;
-      border-radius: 14px;
+      border-radius: 999px;
       border: 1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.06);
+      background: rgba(0,0,0,.25);
       color: var(--text);
       transition: .2s ease;
+      box-shadow: 0 10px 30px rgba(0,0,0,.25);
     }
-    .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.08); }
-    .btn.primary{
+    .btn2:hover{ transform: translateY(-1px); background: rgba(0,0,0,.34); }
+    .btn2.primary{
       background: var(--accent);
       color:#111;
       border-color: rgba(0,0,0,.15);
     }
 
-    .hero-card{
-      border-radius: var(--radius);
+    .chips{
+      display:flex;
+      gap: 8px;
+      flex-wrap:wrap;
+      margin-top: 14px;
+    }
+    .chip{
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
       border: 1px solid rgba(255,255,255,.12);
-      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+      background: rgba(0,0,0,.25);
+      color: rgba(255,255,255,.82);
+    }
+    .chip b{ color: #ffd08f; }
+
+    .panel{
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.25);
+      backdrop-filter: blur(12px);
       box-shadow: var(--shadow);
       padding: 18px;
     }
-    .hero-card h3{ margin: 4px 0 10px; font-size: 14px; color: var(--muted); font-weight: 600; letter-spacing:.08em; text-transform: uppercase; }
-    .metric{ display:grid; gap:10px; }
-    .metric .row{
-      display:flex; justify-content:space-between; align-items:center;
-      padding: 10px 12px;
-      border-radius: 14px;
-      background: rgba(0,0,0,.18);
-      border:1px solid rgba(255,255,255,.08);
+    .panel h3{
+      margin: 0 0 8px;
+      font-size: 14px;
+      color: rgba(255,255,255,.85);
     }
-    .metric .row b{ font-size: 14px; }
-    .metric .row span{ color: var(--muted); font-size: 13px; }
+    .panel p{
+      margin:0;
+      color: rgba(255,255,255,.72);
+      line-height: 1.55;
+      font-size: 13px;
+    }
 
-    /* ====== SECTIONS ====== */
+    /* ========= SECTIONS ========= */
     section{ padding: 46px 0; }
-    .section-title{
-      font-size: 22px;
-      margin: 0 0 10px;
-      letter-spacing: -0.01em;
-    }
-    .section-sub{
-      margin: 0 0 18px;
-      color: var(--muted);
-      line-height: 1.6;
-      max-width: 72ch;
-    }
-    .grid-3{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-    }
+    .title{ font-size: 22px; margin:0 0 10px; letter-spacing:-0.01em; }
+    .lead{ margin:0 0 18px; color: var(--muted); line-height:1.6; max-width: 78ch; }
+    .grid3{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
     .card{
       border-radius: var(--radius);
       border: 1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.05);
       padding: 16px;
     }
-    .card h4{ margin: 0 0 8px; }
-    .card p{ margin: 0; color: var(--muted); line-height:1.55; font-size: 14px; }
-
-    .cta-box{
-      border-radius: calc(var(--radius) + 8px);
-      border: 1px solid rgba(255,255,255,.14);
-      background: radial-gradient(700px 250px at 15% 0%, rgba(255,99,0,.18), transparent 60%),
-                  rgba(255,255,255,.05);
-      box-shadow: var(--shadow);
-      padding: 22px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap: 18px;
-      flex-wrap:wrap;
-    }
+    .card h4{ margin:0 0 8px; }
+    .card p{ margin:0; color: var(--muted); line-height:1.55; font-size: 14px; }
 
     footer{
       padding: 34px 0 46px;
@@ -237,146 +256,126 @@
       background: rgba(0,0,0,.12);
     }
 
-    /* ====== RESPONSIVO ====== */
-    @media (max-width: 920px){
+    /* ========= RESPONSIVO ========= */
+    @media (max-width: 980px){
       .hero-grid{ grid-template-columns: 1fr; }
-      .nav-pill{ transform: translateX(0); } /* em telas menores, não empurra */
     }
-    @media (max-width: 720px){
-      .grid-3{ grid-template-columns: 1fr; }
-      .top-layer{ height: 120px; }
-      .top-inner{ height: 120px; padding-top: 14px; flex-direction: column; gap: 10px; align-items: flex-start; }
-      .nav-pill{ margin-left: 0; }
-      .page{ padding-top: 140px; }
+    @media (max-width: 780px){
+      .topbar{
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      main{ padding-top: 160px; }
+      .grid3{ grid-template-columns: 1fr; }
     }
   </style>
 </head>
 
 <body>
-  <!-- Camada fixa superior (logo esquerda + nav pill direita) -->
-  <div class="top-layer">
-    <div class="container">
-      <div class="top-inner">
-        <a class="brand" href="#top" aria-label="Gustavo Santos Analytics">
-          <!-- TROQUE AQUI o caminho da sua logo -->
-          <img src="assets/logo.png" alt="Gustavo Santos Analytics" />
-        </a>
 
-        <nav class="nav-pill" aria-label="Navegação principal">
-          <a href="#o-que-faco">O que faço</a>
-          <a href="#portfolio">Portfólio</a>
-          <a href="#areas">Áreas</a>
-          <a href="#faq">FAQ</a>
-          <a class="cta" href="#contato">Falar comigo</a>
-        </nav>
-      </div>
-    </div>
-  </div>
+  <!-- Topbar fixa: LOGO no topo-esquerda + MENU no topo-direita -->
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="Gustavo Santos Analytics">
+      <!-- Ajuste aqui o caminho da sua logo -->
+      <img src="assets/logo.png" alt="Gustavo Santos Analytics" />
+    </a>
 
-  <main id="top" class="page">
+    <nav class="nav-pill" aria-label="Navegação">
+      <a href="#sobre">Sobre</a>
+      <a href="#habilidades">Habilidades</a>
+      <a href="#projetos">Projetos</a>
+      <a href="#contato">Contato</a>
+
+      <!-- Ajuste links -->
+      <a class="btn" href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LinkedIn</a>
+      <a class="btn cta" href="https://wa.me/55SEUNUMERO" target="_blank" rel="noreferrer">WhatsApp</a>
+    </nav>
+  </header>
+
+  <main id="top">
     <div class="container">
-      <header class="hero">
+
+      <section class="hero">
         <div class="hero-grid">
           <div>
-            <div class="kicker"><span class="dot"></span>Consultoria em BI & Analytics</div>
-            <h1>Decisão baseada em dados, com entrega rápida e padrão enterprise.</h1>
-            <p class="lead">
-              Eu implemento pipelines de dados, modelagem e dashboards executivos no Power BI — com governança,
-              performance e uma “versão única da verdade” para o seu negócio.
+            <h1>Consultor de BI &<br/>Analytics</h1>
+            <p class="sub"><span style="color:var(--accent); font-weight:700;">Transformo dados complexos</span> em ativos de decisão fundamentados.</p>
+            <p class="sub">
+              Capacito empresas a fundamentarem suas decisões em dados estratégicos,
+              substituindo a intuição por indicadores claros e dashboards que otimizam a rotina de gestão.
             </p>
-            <div class="hero-actions">
-              <a class="btn primary" href="#contato">Agendar conversa</a>
-              <a class="btn" href="#portfolio">Ver exemplos</a>
+
+            <div class="actions">
+              <a class="btn2 primary" href="#projetos">Ver Projetos</a>
+              <a class="btn2" href="#contato">Falar Comigo</a>
+              <a class="btn2" href="https://www.instagram.com/" target="_blank" rel="noreferrer">Instagram</a>
             </div>
+
+            <div class="chips">
+              <span class="chip"><b>Analytics</b> Visualização & BI</span>
+              <span class="chip"><b>Engenharia</b> SQL / Power Query</span>
+              <span class="chip"><b>KPI</b> Indicadores Governados</span>
+              <span class="chip"><b>Cultura</b> Gestão por Resultados</span>
+            </div>
+
+            <span class="highlight">• Inteligência Estratégica Orientada a <b>Dados</b></span>
           </div>
 
-          <aside class="hero-card">
-            <h3>Foco de entrega</h3>
-            <div class="metric">
-              <div class="row"><b>ETL/ELT</b><span>Power Query / SQL / Dataflows</span></div>
-              <div class="row"><b>Modelagem</b><span>Dimensional + medidas DAX</span></div>
-              <div class="row"><b>Dashboards</b><span>Executivo, claro e rápido</span></div>
-              <div class="row"><b>Governança</b><span>Padrões, dicionário e docs</span></div>
-            </div>
+          <aside class="panel">
+            <h3>Entrega com Método</h3>
+            <p>
+              Diagnóstico → Indicadores → Modelagem → Dashboard → Validação → Evolução.<br/>
+              Rigor técnico e clareza para decisões seguras, sem burocracia.
+            </p>
           </aside>
         </div>
-      </header>
+      </section>
 
-      <section id="o-que-faco">
-        <h2 class="section-title">O que eu faço</h2>
-        <p class="section-sub">
-          Projetos end-to-end: do diagnóstico à entrega final. Estrutura sólida de dados + visual limpo + decisão.
+      <section id="sobre">
+        <h2 class="title">Sobre</h2>
+        <p class="lead">
+          Consultoria end-to-end em dados: pipeline, modelagem, performance e dashboards executivos —
+          com padrão de documentação e governança.
         </p>
+      </section>
 
-        <div class="grid-3">
-          <div class="card">
-            <h4>Pipeline de dados</h4>
-            <p>Conexão, tratamento e padronização para reduzir ruído, retrabalho e divergências entre números.</p>
-          </div>
-          <div class="card">
-            <h4>Modelagem & DAX</h4>
-            <p>Modelo dimensional, medidas performáticas e padronizadas (prontas para escala e manutenção).</p>
-          </div>
-          <div class="card">
-            <h4>Storytelling executivo</h4>
-            <p>Dashboard com hierarquia de informação, foco em decisão e leitura rápida (sem poluição visual).</p>
-          </div>
+      <section id="habilidades">
+        <h2 class="title">Habilidades</h2>
+        <p class="lead">Stack típica: Power BI, Power Query, SQL, modelagem dimensional, DAX e boas práticas de governança.</p>
+        <div class="grid3">
+          <div class="card"><h4>ETL/ELT</h4><p>Tratamento, padronização e qualidade de dados para reduzir retrabalho.</p></div>
+          <div class="card"><h4>Modelagem & DAX</h4><p>Modelo limpo, medidas performáticas e totalizações corretas.</p></div>
+          <div class="card"><h4>Storytelling</h4><p>Hierarquia de informação e leitura rápida para decisão.</p></div>
         </div>
       </section>
 
-      <section id="portfolio">
-        <h2 class="section-title">Portfólio</h2>
-        <p class="section-sub">
-          Exemplos e cases (aqui você pode inserir imagens/links conforme for publicando).
-        </p>
-        <div class="grid-3">
-          <div class="card"><h4>Painel de Não Conformidades</h4><p>KPIs, drill-through, causas e plano de ação.</p></div>
-          <div class="card"><h4>Gestão de Viagens & Despesas</h4><p>Visão executiva, centro de custo, tendências e alertas.</p></div>
-          <div class="card"><h4>Faturamento & DRE</h4><p>Fluxo completo do XML à análise financeira.</p></div>
-        </div>
-      </section>
-
-      <section id="areas">
-        <h2 class="section-title">Áreas atendidas</h2>
-        <p class="section-sub">BI pode (e deve) funcionar em qualquer setor com decisão recorrente e números conflitantes.</p>
-        <div class="grid-3">
-          <div class="card"><h4>Serviços & Operações</h4><p>Indicadores, SLA, produtividade e qualidade.</p></div>
-          <div class="card"><h4>Financeiro</h4><p>DRE, caixa, faturamento, custos e rentabilidade.</p></div>
-          <div class="card"><h4>Comercial</h4><p>Vendas, funil, margens, metas e previsibilidade.</p></div>
-        </div>
-      </section>
-
-      <section id="faq">
-        <h2 class="section-title">FAQ</h2>
-        <div class="grid-3">
-          <div class="card"><h4>Você entrega “do zero”?</h4><p>Sim: diagnóstico, pipeline, modelo, DAX, layout e documentação.</p></div>
-          <div class="card"><h4>Trabalha com governança?</h4><p>Sim: padrões de nomes, dicionário, regras e documentação.</p></div>
-          <div class="card"><h4>Qual o próximo passo?</h4><p>Você me explica o objetivo e eu desenho um plano de entrega por etapas.</p></div>
+      <section id="projetos">
+        <h2 class="title">Projetos</h2>
+        <p class="lead">Aqui você pluga seus cases com imagens/links quando quiser.</p>
+        <div class="grid3">
+          <div class="card"><h4>Painel de Não Conformidades</h4><p>KPIs, causas, drill-through e plano de ação.</p></div>
+          <div class="card"><h4>Viagens & Despesas</h4><p>Visão executiva, tendências e alertas.</p></div>
+          <div class="card"><h4>Faturamento & DRE</h4><p>Do XML à análise financeira.</p></div>
         </div>
       </section>
 
       <section id="contato">
-        <div class="cta-box">
-          <div>
-            <h2 class="section-title" style="margin:0 0 6px;">Vamos falar do seu cenário?</h2>
-            <p class="section-sub" style="margin:0;">Me diga onde os números estão conflitantes e o que você precisa decidir todo mês.</p>
-          </div>
-          <div style="display:flex; gap:12px; flex-wrap:wrap;">
-            <a class="btn primary" href="mailto:contato@gustavosantos.net.br">Enviar e-mail</a>
-            <a class="btn" href="#top">Voltar ao topo</a>
-          </div>
+        <h2 class="title">Contato</h2>
+        <p class="lead">Me chame no WhatsApp ou mande e-mail. Eu respondo rápido.</p>
+        <div class="actions">
+          <a class="btn2 primary" href="mailto:contato@gustavosantos.net.br">Enviar e-mail</a>
+          <a class="btn2" href="https://wa.me/55SEUNUMERO" target="_blank" rel="noreferrer">WhatsApp</a>
         </div>
       </section>
+
     </div>
 
     <footer>
-      <div class="container">
-        <div style="display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap;">
-          <div>© <span id="y"></span> Gustavo Santos Analytics</div>
-          <div style="display:flex; gap:12px;">
-            <a href="#portfolio">Portfólio</a>
-            <a href="#contato">Contato</a>
-          </div>
+      <div class="container" style="display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap;">
+        <div>© <span id="y"></span> Gustavo Santos Analytics</div>
+        <div style="display:flex; gap:12px;">
+          <a href="#projetos">Projetos</a>
+          <a href="#contato">Contato</a>
         </div>
       </div>
     </footer>
