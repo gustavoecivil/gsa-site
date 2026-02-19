@@ -1,971 +1,985 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Gustavo Santos Analytics | Inteligência Estratégica Orientada a Dados</title>
-  <meta name="description" content="Consultor de BI & Analytics. Transformo dados complexos em ativos de decisão fundamentados." />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Gustavo Santos Analytics | Inteligência Estratégica Orientada a Dados</title>
+    <meta
+      name="description"
+      content="Especialista em BI & Analytics. Transformo indicadores complexos em ativos de decisão fundamentados com o rigor da engenharia e a clareza da comunicação."
+    />
 
-  <style>
-    :root{
-      --bg:#0B0F14;
-      --surface:#111827;
-      --surface2:#0F172A;
-      --text:#E5E7EB;
-      --muted:#9CA3AF;
-      --muted2:#6B7280;
-      --gold:#D6B25E;
-      --gold2:#C9A227;
-      --line:rgba(255,255,255,.10);
-      --line2:rgba(255,255,255,.08);
-      --shadow: 0 18px 55px rgba(0,0,0,.55);
-      --radius:18px;
-      --max:1120px;
-    }
+    <style>
+      :root {
+        --bg: #0b0f14;
+        --surface: #111827;
+        --text: #e5e7eb;
+        --muted: #9ca3af;
+        --gold: #d6b25e;
+        --gold-2: #c9a227;
+        --line: rgba(255, 255, 255, 0.08);
+        --shadow: 0 18px 55px rgba(0, 0, 0, 0.55);
+        --radius: 18px;
+        --max: 1120px;
+      }
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Helvetica Neue", "Noto Sans", "Liberation Sans", sans-serif;
-      background:
-        radial-gradient(1200px 600px at 15% 10%, rgba(214,178,94,.10), transparent 60%),
-        radial-gradient(900px 520px at 80% 20%, rgba(201,162,39,.08), transparent 58%),
-        var(--bg);
-      color:var(--text);
-      overflow-x:hidden;
-    }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        margin: 0;
+        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
+          Arial, "Helvetica Neue", "Noto Sans", "Liberation Sans", sans-serif;
+        background: radial-gradient(
+            1200px 600px at 15% 10%,
+            rgba(214, 178, 94, 0.1),
+            transparent 60%
+          ),
+          radial-gradient(
+            900px 520px at 80% 20%,
+            rgba(201, 162, 39, 0.08),
+            transparent 58%
+          ),
+          var(--bg);
+        color: var(--text);
+        overflow-x: hidden;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      .container {
+        max-width: var(--max);
+        margin: 0 auto;
+        padding: 0 22px;
+      }
 
-    a{color:inherit; text-decoration:none}
-    .container{max-width:var(--max); margin:0 auto; padding:0 22px}
+      /* ======= NOVO: espaço no header + marca no HERO ======= */
+      .brand-spacer {
+        width: 260px;
+      }
 
-    /* ===== Header ===== */
-    header{
-      position:sticky;
-      top:0;
-      z-index:50;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      background: linear-gradient(to bottom, rgba(10,14,20,.72), rgba(10,14,20,.42));
-      border-bottom:1px solid var(--line2);
-    }
+      .hero-topbrand {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 14px;
+        border-radius: 999px;
+        background: rgba(8, 11, 20, 0.55);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 18px 55px rgba(0, 0, 0, 0.55);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        margin-bottom: 18px;
+      }
+      .hero-logo {
+        width: 28px;
+        height: 28px;
+        border-radius: 8px;
+        object-fit: contain;
+        filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.45));
+      }
+      .hero-brandname {
+        font-weight: 700;
+        letter-spacing: 0.2px;
+        font-size: 14px;
+        color: var(--text);
+        opacity: 0.95;
+        white-space: nowrap;
+      }
 
-    .nav{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:18px;
-      padding:14px 0;
-    }
+      @media (max-width: 860px) {
+        .brand-spacer {
+          display: none;
+        }
+        .hero-topbrand {
+          margin-top: 8px;
+        }
+      }
+      /* ====================================================== */
 
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      min-width: 260px;
-    }
+      /* subtle particles */
+      .particles {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        background-image: radial-gradient(
+            rgba(255, 255, 255, 0.06) 1px,
+            transparent 1px
+          ),
+          radial-gradient(rgba(214, 178, 94, 0.06) 1px, transparent 1px);
+        background-size: 60px 60px, 90px 90px;
+        background-position: 0 0, 30px 45px;
+        opacity: 0.4;
+        mask-image: radial-gradient(
+          800px 500px at 50% 10%,
+          black 25%,
+          transparent 70%
+        );
+      }
 
-    .brand-badge{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      padding:8px 12px;
-      border:1px solid var(--line);
-      border-radius:999px;
-      background: rgba(17,24,39,.55);
-      box-shadow: 0 10px 30px rgba(0,0,0,.25);
-    }
+      /* header */
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        background: rgba(8, 11, 20, 0.55);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      }
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 0;
+        gap: 18px;
+      }
+      nav ul {
+        list-style: none;
+        display: flex;
+        gap: 22px;
+        margin: 0;
+        padding: 0;
+        color: rgba(229, 231, 235, 0.9);
+        font-size: 13px;
+      }
+      nav a {
+        opacity: 0.88;
+      }
+      nav a:hover {
+        opacity: 1;
+      }
 
-    .brand-badge img{
-      width:22px;
-      height:22px;
-      display:block;
-      object-fit:contain;
-      filter: drop-shadow(0 8px 18px rgba(0,0,0,.35));
-    }
+      .nav-cta {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+      .btn {
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(17, 24, 39, 0.35);
+        color: var(--text);
+        padding: 10px 14px;
+        border-radius: 999px;
+        font-weight: 600;
+        font-size: 12px;
+        letter-spacing: 0.2px;
+        cursor: pointer;
+        transition: transform 0.12s ease, background 0.12s ease,
+          border-color 0.12s ease;
+      }
+      .btn:hover {
+        transform: translateY(-1px);
+        border-color: rgba(255, 255, 255, 0.2);
+        background: rgba(17, 24, 39, 0.5);
+      }
+      .btn-primary {
+        background: linear-gradient(
+          180deg,
+          rgba(214, 178, 94, 1),
+          rgba(201, 162, 39, 1)
+        );
+        color: #0b0f14;
+        border: none;
+      }
+      .btn-primary:hover {
+        transform: translateY(-1px);
+      }
+      .btn-outline {
+        background: rgba(17, 24, 39, 0.25);
+      }
 
-    .brand-badge span{
-      font-weight:600;
-      font-size:14px;
-      letter-spacing:.2px;
-      white-space:nowrap;
-    }
+      /* mobile menu */
+      .hamb {
+        display: none;
+      }
+      .mobile-menu {
+        display: none;
+      }
 
-    .menu{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      flex:1;
-    }
-    .menu ul{
-      list-style:none;
-      padding:0;
-      margin:0;
-      display:flex;
-      gap:22px;
-      align-items:center;
-    }
-    .menu a{
-      font-size:13px;
-      color: rgba(229,231,235,.82);
-      padding:8px 10px;
-      border-radius:999px;
-      transition: background .2s ease, color .2s ease;
-    }
-    .menu a:hover{
-      background: rgba(255,255,255,.06);
-      color:#fff;
-    }
+      @media (max-width: 860px) {
+        nav ul {
+          display: none;
+        }
+        .hamb {
+          display: inline-flex;
+        }
+        .mobile-menu {
+          display: none;
+          border-top: 1px solid rgba(255, 255, 255, 0.06);
+          padding: 10px 0 16px;
+        }
+        .mobile-menu.open {
+          display: block;
+        }
+        .mobile-menu a {
+          display: block;
+          padding: 10px 0;
+          opacity: 0.9;
+        }
+      }
 
-    .nav-cta{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      min-width: 260px;
-      justify-content:flex-end;
-    }
+      /* hero */
+      .hero {
+        position: relative;
+        padding: 34px 0 26px;
+      }
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+            180deg,
+            rgba(11, 15, 20, 0.18) 0%,
+            rgba(11, 15, 20, 0.72) 56%,
+            rgba(11, 15, 20, 1) 100%
+          ),
+          url("hero.png") center/cover no-repeat;
+        opacity: 0.95;
+        filter: saturate(1.05);
+      }
+      .hero > .container {
+        position: relative;
+        z-index: 2;
+      }
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 26px;
+        align-items: center;
+      }
+      @media (max-width: 960px) {
+        .hero-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .kicker {
+        font-size: 11px;
+        letter-spacing: 0.22em;
+        color: rgba(214, 178, 94, 0.85);
+        text-transform: uppercase;
+        margin-bottom: 10px;
+      }
+      h1 {
+        margin: 0 0 10px 0;
+        font-size: 42px;
+        line-height: 1.08;
+      }
+      @media (max-width: 520px) {
+        h1 {
+          font-size: 34px;
+        }
+      }
+      .lead {
+        color: rgba(229, 231, 235, 0.86);
+        font-size: 13px;
+        line-height: 1.6;
+        max-width: 54ch;
+      }
+      .sublead {
+        color: rgba(201, 162, 39, 0.8);
+        margin: 8px 0 16px;
+        font-size: 13px;
+      }
+      .cta-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 16px;
+      }
+      .chips {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-top: 14px;
+      }
+      .chip {
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(17, 24, 39, 0.35);
+        padding: 7px 10px;
+        border-radius: 999px;
+        font-size: 11px;
+        color: rgba(229, 231, 235, 0.85);
+      }
+      .chip b {
+        color: rgba(214, 178, 94, 0.9);
+        font-weight: 700;
+      }
 
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      padding:10px 14px;
-      border-radius:999px;
-      font-size:13px;
-      border:1px solid var(--line);
-      background: rgba(17,24,39,.55);
-      color: rgba(229,231,235,.92);
-      cursor:pointer;
-      transition: transform .12s ease, background .2s ease, border-color .2s ease;
-      user-select:none;
-      white-space:nowrap;
-    }
-    .btn:hover{background: rgba(17,24,39,.72); border-color: rgba(255,255,255,.18)}
-    .btn:active{transform: translateY(1px)}
-    .btn-primary{
-      background: linear-gradient(180deg, rgba(214,178,94,.95), rgba(201,162,39,.92));
-      color:#101318;
-      border-color: rgba(214,178,94,.55);
-      font-weight:700;
-    }
-    .btn-primary:hover{
-      background: linear-gradient(180deg, rgba(214,178,94,1), rgba(201,162,39,1));
-      border-color: rgba(214,178,94,.75);
-    }
-    .btn-outline{
-      background: rgba(17,24,39,.35);
-    }
+      .method-card {
+        background: rgba(17, 24, 39, 0.55);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 16px;
+        padding: 16px;
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+      }
+      .method-card h3 {
+        margin: 0 0 8px 0;
+        font-size: 12px;
+        letter-spacing: 0.2px;
+      }
+      .method-card p {
+        margin: 0;
+        font-size: 11px;
+        color: rgba(229, 231, 235, 0.82);
+        line-height: 1.55;
+      }
 
-    /* Mobile menu */
-    .hamb{
-      display:none;
-      padding:10px 12px;
-    }
-    .mobile-menu{
-      display:none;
-      border-top: 1px solid var(--line2);
-      padding: 12px 0 16px;
-    }
-    .mobile-menu a{
-      display:block;
-      padding:10px 12px;
-      border-radius:12px;
-      color: rgba(229,231,235,.9);
-    }
-    .mobile-menu a:hover{background: rgba(255,255,255,.06)}
+      .banner {
+        margin: 22px 0 0;
+        background: rgba(0, 0, 0, 0.25);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        border-radius: 999px;
+        padding: 14px 16px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        box-shadow: 0 25px 70px rgba(0, 0, 0, 0.55);
+      }
+      .banner b {
+        color: rgba(214, 178, 94, 0.95);
+      }
+      .dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: rgba(214, 178, 94, 0.95);
+        box-shadow: 0 0 0 6px rgba(214, 178, 94, 0.12);
+      }
 
-    /* ===== Hero ===== */
-    .hero{
-      position:relative;
-      min-height: 560px;
-      padding: 34px 0 0;
-    }
+      /* sections */
+      section.block {
+        padding: 40px 0;
+      }
+      .section-title {
+        font-size: 22px;
+        margin: 0 0 8px;
+      }
+      .section-desc {
+        margin: 0 0 18px;
+        color: rgba(229, 231, 235, 0.72);
+        font-size: 12px;
+        max-width: 70ch;
+      }
 
-    .hero-bg{
-      position:absolute;
-      inset:0;
-      background:
-        linear-gradient(180deg, rgba(11,15,20,.42) 0%, rgba(11,15,20,.78) 60%, rgba(11,15,20,1) 100%),
-        url("hero.png");
-      background-size: cover;
-      background-position: center;
-      filter: saturate(1.02) contrast(1.02);
-      opacity: .92;
-    }
+      /* logos */
+      .logo-row {
+        display: flex;
+        gap: 18px;
+        align-items: center;
+        padding: 18px 0 0;
+      }
+      .logo-row small {
+        display: block;
+        color: rgba(229, 231, 235, 0.6);
+        font-size: 11px;
+        margin-bottom: 10px;
+      }
+      .logos {
+        display: flex;
+        gap: 18px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      .logo-box {
+        width: 170px;
+        height: 48px;
+        display: grid;
+        place-items: center;
+        border-radius: 12px;
+        background: rgba(17, 24, 39, 0.35);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+      }
+      .logo-box img {
+        max-width: 110px;
+        max-height: 32px;
+        opacity: 0.95;
+      }
 
-    .hero-inner{
-      position:relative;
-      padding: 70px 0 34px;
-    }
+      /* cards */
+      .grid-3 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      }
+      @media (max-width: 960px) {
+        .grid-3 {
+          grid-template-columns: 1fr;
+        }
+      }
+      .card {
+        background: rgba(17, 24, 39, 0.5);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: var(--radius);
+        padding: 18px;
+        box-shadow: 0 22px 65px rgba(0, 0, 0, 0.45);
+      }
+      .card .tag {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 26px;
+        height: 26px;
+        border-radius: 10px;
+        background: rgba(214, 178, 94, 0.1);
+        border: 1px solid rgba(214, 178, 94, 0.25);
+        color: rgba(214, 178, 94, 0.95);
+        font-weight: 800;
+        font-size: 11px;
+        margin-bottom: 10px;
+      }
+      .card h4 {
+        margin: 0 0 8px;
+        font-size: 14px;
+      }
+      .card p {
+        margin: 0;
+        color: rgba(229, 231, 235, 0.72);
+        font-size: 12px;
+        line-height: 1.55;
+      }
 
-    .grid-hero{
-      display:grid;
-      grid-template-columns: 1.08fr .92fr;
-      gap: 22px;
-      align-items:start;
-    }
+      /* projects */
+      .proj-card h4 {
+        margin: 0 0 8px;
+      }
+      .proj-card ul {
+        margin: 10px 0 14px;
+        padding-left: 18px;
+        color: rgba(229, 231, 235, 0.72);
+        font-size: 12px;
+        line-height: 1.6;
+      }
+      .proj-actions {
+        margin-top: 10px;
+      }
 
-    .kicker{
-      font-size:12px;
-      letter-spacing:.22em;
-      color: rgba(214,178,94,.9);
-      margin: 4px 0 10px;
-    }
+      /* about */
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 16px;
+        align-items: start;
+      }
+      @media (max-width: 960px) {
+        .about-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .bullets {
+        margin: 0;
+        padding-left: 18px;
+        color: rgba(229, 231, 235, 0.8);
+        font-size: 12px;
+        line-height: 1.7;
+      }
+      .pill-stack {
+        display: grid;
+        gap: 10px;
+      }
+      .pill {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        padding: 10px 12px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(17, 24, 39, 0.35);
+        font-size: 11px;
+        color: rgba(229, 231, 235, 0.85);
+      }
+      .pill b {
+        color: rgba(214, 178, 94, 0.95);
+      }
 
-    h1{
-      font-size: 48px;
-      line-height: 1.05;
-      margin: 0 0 8px;
-      letter-spacing: -.02em;
-    }
+      /* contact */
+      .contact-grid {
+        display: grid;
+        grid-template-columns: 0.9fr 1.1fr;
+        gap: 16px;
+      }
+      @media (max-width: 960px) {
+        .contact-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .contact-list .item {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 12px 14px;
+        border-radius: 14px;
+        background: rgba(17, 24, 39, 0.35);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        margin-bottom: 10px;
+        font-size: 12px;
+      }
+      .contact-list .item small {
+        color: rgba(229, 231, 235, 0.62);
+      }
 
-    .subline{
-      font-size: 14px;
-      color: rgba(214,178,94,.92);
-      margin: 0 0 14px;
-      max-width: 520px;
-    }
+      form {
+        background: rgba(17, 24, 39, 0.5);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: var(--radius);
+        padding: 18px;
+      }
+      .field-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-bottom: 10px;
+      }
+      @media (max-width: 640px) {
+        .field-row {
+          grid-template-columns: 1fr;
+        }
+      }
+      input,
+      textarea {
+        width: 100%;
+        background: rgba(0, 0, 0, 0.22);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 12px;
+        padding: 10px 12px;
+        color: var(--text);
+        font-size: 12px;
+        outline: none;
+      }
+      textarea {
+        min-height: 94px;
+        resize: vertical;
+      }
+      .form-actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 10px;
+        flex-wrap: wrap;
+      }
 
-    .lead{
-      font-size: 13px;
-      line-height: 1.6;
-      color: rgba(229,231,235,.80);
-      margin: 0 0 18px;
-      max-width: 560px;
-    }
+      footer {
+        padding: 24px 0 30px;
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+        color: rgba(229, 231, 235, 0.6);
+        font-size: 11px;
+      }
+      .footer-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 14px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+      .footer-row a {
+        opacity: 0.85;
+      }
+      .footer-row a:hover {
+        opacity: 1;
+      }
+    </style>
+  </head>
 
-    .cta-row{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin: 10px 0 12px;
-    }
+  <body>
+    <div class="particles"></div>
 
-    .chips{
-      display:flex;
-      gap:8px;
-      flex-wrap:wrap;
-      margin-top: 10px;
-    }
-    .chip{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding: 8px 10px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(17,24,39,.45);
-      color: rgba(229,231,235,.86);
-      font-size: 11px;
-    }
-    .chip b{
-      color: rgba(214,178,94,.95);
-      font-weight:700;
-      font-size: 10px;
-      letter-spacing:.08em;
-    }
+    <header>
+      <div class="container">
+        <div class="nav">
+          <!-- ESQUERDA VAZIA (marca sai do header) -->
+          <div class="brand-spacer" aria-hidden="true"></div>
 
-    .method-card{
-      margin-top: 56px;
-      background: rgba(17,24,39,.55);
-      border:1px solid rgba(255,255,255,.12);
-      border-radius: 16px;
-      box-shadow: var(--shadow);
-      padding: 16px 16px 14px;
-      max-width: 420px;
-      justify-self:end;
-    }
-    .method-card h3{
-      margin:0 0 6px;
-      font-size: 12px;
-      color:#fff;
-      font-weight:800;
-      letter-spacing:.02em;
-    }
-    .method-card p{
-      margin:0;
-      font-size: 11px;
-      line-height: 1.55;
-      color: rgba(229,231,235,.78);
-    }
+          <!-- MENU CENTRAL -->
+          <nav aria-label="Menu principal">
+            <ul>
+              <li><a href="#sobre">Sobre</a></li>
+              <li><a href="#habilidades">Habilidades</a></li>
+              <li><a href="#portfolio">Projetos</a></li>
+              <li><a href="#contato">Contato</a></li>
+            </ul>
+          </nav>
 
-    .banner{
-      margin-top: 26px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding: 14px 14px;
-      border-radius: 999px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(0,0,0,.28);
-      box-shadow: 0 24px 70px rgba(0,0,0,.55);
-      text-align:center;
-    }
-    .banner span{
-      font-weight:800;
-      letter-spacing:-.01em;
-      font-size: 18px;
-    }
-    .banner .dot{
-      width:8px; height:8px;
-      background: rgba(214,178,94,.95);
-      border-radius:999px;
-      display:inline-block;
-      margin-right:10px;
-      box-shadow: 0 0 0 3px rgba(214,178,94,.12);
-    }
-    .banner .accent{ color: rgba(214,178,94,.95) }
-
-    /* ===== Sections / Cards ===== */
-    section{padding: 42px 0}
-    .section-head{
-      display:flex;
-      align-items:flex-end;
-      justify-content:space-between;
-      gap:18px;
-      margin-bottom: 18px;
-    }
-    h2{
-      font-size: 22px;
-      margin:0;
-      letter-spacing:-.01em;
-    }
-    .section-desc{
-      margin: 4px 0 0;
-      color: rgba(229,231,235,.68);
-      font-size: 12px;
-      max-width: 720px;
-      line-height: 1.6;
-    }
-
-    .glass{
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(17,24,39,.50);
-      border-radius: var(--radius);
-      box-shadow: 0 22px 70px rgba(0,0,0,.45);
-    }
-
-    .logos-strip{
-      margin-top: 22px;
-      padding: 18px 18px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap: 22px;
-      flex-wrap:wrap;
-    }
-
-    .logo-pill{
-      height: 46px;
-      min-width: 170px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding: 10px 16px;
-      border-radius: 14px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(0,0,0,.16);
-    }
-    .logo-pill img{
-      height: 26px;
-      width: auto;
-      display:block;
-      object-fit:contain;
-      filter: grayscale(.15) contrast(1.05);
-      opacity: .95;
-    }
-    .logos-label{
-      font-size: 11px;
-      color: rgba(229,231,235,.55);
-      margin: 0 0 10px;
-    }
-
-    .grid-3{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-    }
-
-    .card{
-      padding: 18px 18px 16px;
-      border-radius: var(--radius);
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(17,24,39,.52);
-      min-height: 132px;
-    }
-
-    .card-top{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      margin-bottom: 10px;
-    }
-
-    .num{
-      width: 28px;
-      height: 22px;
-      border-radius: 10px;
-      border:1px solid rgba(214,178,94,.25);
-      background: rgba(214,178,94,.10);
-      color: rgba(214,178,94,.95);
-      font-weight:800;
-      font-size: 11px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-    }
-
-    .card h3{
-      margin:0;
-      font-size: 13px;
-      font-weight:800;
-      color: rgba(229,231,235,.95);
-    }
-
-    .card p{
-      margin:0;
-      font-size: 12px;
-      line-height: 1.55;
-      color: rgba(229,231,235,.68);
-    }
-
-    .project-card{
-      padding: 18px;
-      min-height: 210px;
-      display:flex;
-      flex-direction:column;
-      gap: 10px;
-    }
-    .project-card h3{
-      margin:0;
-      font-size: 13px;
-      font-weight:900;
-    }
-    .project-card .subtitle{
-      margin:0;
-      font-size: 11px;
-      color: rgba(229,231,235,.62);
-      line-height:1.5;
-    }
-    .project-card ul{
-      margin: 8px 0 0;
-      padding-left: 16px;
-      color: rgba(229,231,235,.70);
-      font-size: 11px;
-      line-height: 1.6;
-    }
-    .project-card .actions{
-      margin-top:auto;
-      display:flex;
-      gap:10px;
-    }
-    .btn-sm{
-      padding: 9px 12px;
-      font-size: 12px;
-      border-radius: 12px;
-    }
-
-    /* ===== About ===== */
-    .grid-about{
-      display:grid;
-      grid-template-columns: 1.15fr .85fr;
-      gap: 18px;
-      align-items:start;
-    }
-    .about-box{
-      padding: 18px;
-    }
-    .about-box h3{
-      margin: 0 0 10px;
-      font-size: 12px;
-      font-weight: 900;
-      color: rgba(229,231,235,.92);
-    }
-    .about-box ul{
-      margin:0;
-      padding-left: 18px;
-      color: rgba(229,231,235,.70);
-      font-size: 11px;
-      line-height: 1.7;
-    }
-    .tags{
-      padding: 18px;
-      display:flex;
-      flex-direction:column;
-      gap: 10px;
-    }
-    .tag{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding: 10px 12px;
-      border-radius: 999px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(0,0,0,.15);
-      font-size: 11px;
-      color: rgba(229,231,235,.72);
-      width: fit-content;
-    }
-    .tag b{
-      color: rgba(214,178,94,.95);
-      font-size: 10px;
-      letter-spacing:.04em;
-    }
-
-    /* ===== Contact ===== */
-    .contact-wrap{
-      display:grid;
-      grid-template-columns: .9fr 1.1fr;
-      gap: 18px;
-      align-items:start;
-    }
-    .contact-left, .contact-right{
-      padding: 18px;
-    }
-
-    .contact-item{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      padding: 12px 12px;
-      border-radius: 14px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(0,0,0,.16);
-      margin-bottom: 10px;
-    }
-    .contact-item span{
-      font-size: 12px;
-      color: rgba(229,231,235,.85);
-      font-weight:700;
-    }
-    .contact-item small{
-      font-size: 11px;
-      color: rgba(229,231,235,.62);
-    }
-
-    .form-row{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-bottom: 10px;
-    }
-    .field{
-      display:flex;
-      flex-direction:column;
-      gap:6px;
-    }
-    .field label{
-      font-size: 11px;
-      color: rgba(229,231,235,.60);
-    }
-    input, textarea{
-      width:100%;
-      padding: 11px 12px;
-      border-radius: 12px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(0,0,0,.14);
-      color: rgba(229,231,235,.90);
-      outline:none;
-      font-size: 12px;
-    }
-    textarea{min-height: 110px; resize: vertical}
-    input:focus, textarea:focus{
-      border-color: rgba(214,178,94,.35);
-      box-shadow: 0 0 0 3px rgba(214,178,94,.10);
-    }
-
-    .form-actions{
-      display:flex;
-      gap:10px;
-      margin-top: 10px;
-      flex-wrap:wrap;
-    }
-
-    /* ===== Footer ===== */
-    footer{
-      padding: 20px 0 30px;
-      border-top: 1px solid rgba(255,255,255,.08);
-      background: rgba(0,0,0,.15);
-    }
-    .footer-row{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap: 12px;
-      flex-wrap:wrap;
-      color: rgba(229,231,235,.58);
-      font-size: 11px;
-    }
-    .footer-row img{
-      width: 18px;
-      height: 18px;
-      object-fit:contain;
-      opacity: .9;
-    }
-
-    /* ===== Responsive ===== */
-    @media (max-width: 980px){
-      h1{font-size: 40px}
-      .grid-hero{grid-template-columns: 1fr}
-      .method-card{justify-self:start; margin-top: 10px; max-width: 520px}
-      .grid-3{grid-template-columns: 1fr}
-      .grid-about{grid-template-columns: 1fr}
-      .contact-wrap{grid-template-columns: 1fr}
-      .menu{display:none}
-      .hamb{display:inline-flex}
-      .mobile-menu{display:block}
-      .nav-cta{min-width: auto}
-      .brand{min-width:auto}
-    }
-
-    @media (max-width: 520px){
-      h1{font-size: 34px}
-      .banner span{font-size: 15px}
-      .form-row{grid-template-columns: 1fr}
-      .logo-pill{min-width: 150px}
-      .brand-badge span{display:none}
-    }
-  </style>
-</head>
-
-<body>
-
-<header>
-  <div class="container">
-    <div class="nav">
-      <!-- LOGO + NOME (Topo Esquerdo) -->
-      <div class="brand">
-        <a class="brand-badge" href="#topo" aria-label="Voltar ao topo">
-          <img src="logo-gsa-white.png" alt="Logo Gustavo Santos Analytics">
-          <span>Gustavo Santos Analytics</span>
-        </a>
-      </div>
-
-      <!-- MENU CENTRAL -->
-      <nav class="menu" aria-label="Menu principal">
-        <ul>
-          <li><a href="#sobre">Sobre</a></li>
-          <li><a href="#habilidades">Habilidades</a></li>
-          <li><a href="#portfolio">Projetos</a></li>
-          <li><a href="#contato">Contato</a></li>
-        </ul>
-      </nav>
-
-      <!-- CTA DIREITA -->
-      <div class="nav-cta">
-        <a class="btn btn-outline" href="https://bit.ly/gsa-linkedin" target="_blank" rel="noreferrer">LinkedIn</a>
-        <a class="btn btn-primary" href="https://wa.me/553171379432" target="_blank" rel="noreferrer">WhatsApp</a>
-        <button class="btn hamb" id="hamb" aria-label="Abrir menu">Menu</button>
-      </div>
-    </div>
-
-    <div class="mobile-menu" id="mobileMenu" style="display:none">
-      <a href="#sobre">Sobre</a>
-      <a href="#habilidades">Habilidades</a>
-      <a href="#portfolio">Projetos</a>
-      <a href="#contato">Contato</a>
-      <div style="display:flex; gap:10px; padding:10px 12px 0;">
-        <a class="btn btn-outline" style="flex:1" href="https://bit.ly/gsa-linkedin" target="_blank" rel="noreferrer">LinkedIn</a>
-        <a class="btn btn-primary" style="flex:1" href="https://wa.me/553171379432" target="_blank" rel="noreferrer">WhatsApp</a>
-      </div>
-    </div>
-  </div>
-</header>
-
-<main id="topo">
-
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-bg" aria-hidden="true"></div>
-
-    <div class="container hero-inner">
-      <div class="grid-hero">
-        <div>
-          <div class="kicker">GUSTAVO SANTOS</div>
-          <h1>Consultor de BI &amp; Analytics</h1>
-
-          <p class="subline">Transformo dados complexos em <b>ativos de decisão</b> fundamentados.</p>
-
-          <p class="lead">
-            Capacito empresas a fundamentarem suas decisões em dados estratégicos,
-            substituindo a intuição por indicadores claros e dashboards que otimizam a rotina de gestão.
-          </p>
-
-          <div class="cta-row">
-            <a class="btn btn-primary" href="#portfolio">Ver Projetos</a>
-            <a class="btn" href="#contato">Falar Comigo</a>
-            <a class="btn" href="https://instagram.com/gustavosantosanalytics" target="_blank" rel="noreferrer">Instagram</a>
-          </div>
-
-          <div class="chips">
-            <span class="chip"><b>Analytics</b> Visualização &amp; BI</span>
-            <span class="chip"><b>Engenharia</b> SQL / Power Query</span>
-            <span class="chip"><b>KPI</b> Indicadores Governados</span>
-            <span class="chip"><b>Cultura</b> Gestão por Resultados</span>
+          <!-- BOTÕES À DIREITA -->
+          <div class="nav-cta">
+            <a
+              class="btn btn-outline"
+              href="https://bit.ly/gsa-linkedin"
+              target="_blank"
+              rel="noreferrer"
+              >LinkedIn</a
+            >
+            <a
+              class="btn btn-primary"
+              href="https://wa.me/553171379432"
+              target="_blank"
+              rel="noreferrer"
+              >WhatsApp</a
+            >
+            <button class="btn hamb" id="hamb" aria-label="Abrir menu">
+              Menu
+            </button>
           </div>
         </div>
 
-        <aside class="method-card">
-          <h3>Entrega com Método</h3>
-          <p>
-            Diagnóstico → Indicadores → Modelagem → Dashboard → Validação → Evolução.
-            Rigor técnico e clareza para decisões seguras, sem burocracia.
-          </p>
-        </aside>
-      </div>
-
-      <div class="banner">
-        <span class="dot" aria-hidden="true"></span>
-        <span>Inteligência Estratégica Orientada a <span class="accent">Dados</span></span>
-      </div>
-    </div>
-  </section>
-
-  <!-- CLIENTES / LOGOS -->
-  <section style="padding-top:26px">
-    <div class="container">
-      <div class="glass" style="padding:18px 18px 16px;">
-        <div class="logos-label">Experiências e referências corporativas</div>
-        <div class="logos-strip">
-          <div class="logo-pill"><img src="bmg.png" alt="Grupo BMG"></div>
-          <div class="logo-pill"><img src="gmt.png" alt="Grupo Maurício Toledo (GMT)"></div>
-          <div class="logo-pill"><img src="crono.png" alt="Crono Engenheiros Consultores"></div>
+        <div class="mobile-menu" id="mobileMenu">
+          <a href="#sobre">Sobre</a>
+          <a href="#habilidades">Habilidades</a>
+          <a href="#portfolio">Projetos</a>
+          <a href="#contato">Contato</a>
         </div>
       </div>
-    </div>
-  </section>
+    </header>
 
-  <!-- HABILIDADES -->
-  <section id="habilidades">
-    <div class="container">
-      <div class="section-head">
-        <div>
-          <h2>Habilidades</h2>
-          <p class="section-desc">
-            Da imersão estratégica à inteligência de dados: ativos de decisão fundamentados, consistentes e escaláveis.
-          </p>
-        </div>
-      </div>
-
-      <div class="grid-3">
-        <div class="card">
-          <div class="card-top">
-            <div class="num">01</div>
-            <h3>Diagnóstico &amp; Mapeamento</h3>
-          </div>
-          <p>Entendimento da necessidade, tradução de dores em KPIs e alinhamento conceitual para garantir uma única fonte da verdade.</p>
-        </div>
-
-        <div class="card">
-          <div class="card-top">
-            <div class="num">02</div>
-            <h3>Engenharia &amp; Modelagem</h3>
-          </div>
-          <p>Tratamento, padronização e estruturação lógica (SQL/ETL) com o rigor da engenharia para garantir integridade técnica.</p>
-        </div>
-
-        <div class="card">
-          <div class="card-top">
-            <div class="num">03</div>
-            <h3>Analytics &amp; Adoção</h3>
-          </div>
-          <p>Dashboards intuitivos focados em usabilidade, com documentação de apoio e suporte para que o dado vire rotina de gestão.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PROJETOS -->
-  <section id="portfolio">
-    <div class="container">
-      <div class="section-head">
-        <div>
-          <h2>Projetos</h2>
-          <p class="section-desc">Explore alguns dos meus estudos de caso interativos desenvolvidos para o cenário corporativo.</p>
-        </div>
-      </div>
-
-      <div class="grid-3">
-        <div class="card project-card">
-          <h3>Performance de Vendas &amp; Forecasting</h3>
-          <p class="subtitle">Visão executiva focada no crescimento e na previsibilidade de receita.</p>
-          <ul>
-            <li>Análise de Pareto (80/20) de produtos e clientes</li>
-            <li>Comparativos anuais (YoY) e mensais (MoM)</li>
-            <li>Projeção estatística de fechamento do faturamento</li>
-          </ul>
-          <div class="actions">
-            <a class="btn btn-primary btn-sm" href="#" onclick="return false;">Abrir Dashboard</a>
-          </div>
-        </div>
-
-        <div class="card project-card">
-          <h3>Gestão Financeira &amp; Governança</h3>
-          <p class="subtitle">DRE automatizada e ecossistema de dados para controle de caixa seguro.</p>
-          <ul>
-            <li>Integração total: EBITDA, Fluxo de Caixa e Inadimplência</li>
-            <li>Comparativo Budget vs. Actual (Planejado vs. Realizado)</li>
-            <li>100% de integridade técnica e conciliação de saldos</li>
-          </ul>
-          <div class="actions">
-            <a class="btn btn-primary btn-sm" href="#" onclick="return false;">Abrir Dashboard</a>
-          </div>
-        </div>
-
-        <div class="card project-card">
-          <h3>Engenharia de Obras &amp; Eficiência</h3>
-          <p class="subtitle">Monitoramento técnico de canteiro focado em produtividade e custos.</p>
-          <ul>
-            <li>Gestão baseada em Earned Value Management (EVM)</li>
-            <li>Controle de IDC (Custos), IDP (Prazos) e Desperdício</li>
-            <li>Produtividade HH comparada às médias de mercado</li>
-          </ul>
-          <div class="actions">
-            <a class="btn btn-primary btn-sm" href="#" onclick="return false;">Abrir Dashboard</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SOBRE -->
-  <section id="sobre">
-    <div class="container">
-      <div class="section-head">
-        <div>
-          <h2>Sobre</h2>
-          <p class="section-desc">
-            Atuo no desenvolvimento de soluções de Business Intelligence que convertem desafios operacionais em ativos de decisão.
-            Minha trajetória une o rigor técnico da engenharia e a clareza estratégica da comunicação, entregando governança de dados para áreas como Jurídico, Auditoria, Contabilidade e Engenharia Civil.
-          </p>
-        </div>
-      </div>
-
-      <div class="grid-about">
-        <div class="glass about-box">
-          <h3>O que você pode esperar</h3>
-          <ul>
-            <li><b>Diagnóstico Estratégico:</b> Imersão real para entender o problema e gerar impacto imediato.</li>
-            <li><b>Integridade de Dados:</b> Indicadores consistentes com regras de cálculo homologadas.</li>
-            <li><b>Fluxo Pragmático:</b> Estruturas ágeis focadas em transformar dados em insights e decisão.</li>
-            <li><b>Sustentabilidade:</b> Documentação e suporte técnico para manter a inteligência viva.</li>
-          </ul>
-        </div>
-
-        <div class="glass tags">
-          <span class="tag"><b>3 anos</b> consultoria BI em grupo de grande porte</span>
-          <span class="tag"><b>Alta Performance</b> foco em estruturas enxutas e escaláveis</span>
-          <span class="tag"><b>ETL</b> SQL / Power Query / Python</span>
-          <span class="tag"><b>BI</b> Power BI (Modelagem complexa + DAX)</span>
-          <span class="tag"><b>Rotina</b> Gestão por resultados baseada em evidências</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTATO -->
-  <section id="contato">
-    <div class="container">
-      <div class="section-head">
-        <div>
-          <h2>Contato</h2>
-          <p class="section-desc">Pronto para transformar sua gestão com inteligência de dados? Vamos conversar.</p>
-        </div>
-      </div>
-
-      <div class="glass contact-wrap">
-        <div class="contact-left">
-          <div class="contact-item">
-            <span>WhatsApp Business</span>
-            <small><a href="https://wa.me/553171379432" target="_blank" rel="noreferrer">wa.me/553171379432</a></small>
+    <main>
+      <section class="hero">
+        <div class="container hero-content">
+          <!-- MARCA AGORA NO HERO (logo após o header) -->
+          <div class="hero-topbrand">
+            <img
+              src="logo-gsa-white.png"
+              alt="Logo Gustavo Santos Analytics"
+              class="hero-logo"
+            />
+            <span class="hero-brandname">Gustavo Santos Analytics</span>
           </div>
 
-          <div class="contact-item">
-            <span>Email</span>
-            <small><a href="mailto:gustavo@coutosantos.com">gustavo@coutosantos.com</a></small>
-          </div>
-
-          <div class="contact-item">
-            <span>LinkedIn</span>
-            <small><a href="https://bit.ly/gsa-linkedin" target="_blank" rel="noreferrer">bit.ly/gsa-linkedin</a></small>
-          </div>
-
-          <div class="contact-item" style="margin-bottom:0;">
-            <span>Instagram</span>
-            <small><a href="https://instagram.com/gustavosantosanalytics" target="_blank" rel="noreferrer">@gustavosantosanalytics</a></small>
-          </div>
-        </div>
-
-        <div class="contact-right">
-          <form onsubmit="return false;">
-            <div class="form-row">
-              <div class="field">
-                <label for="nome">Nome</label>
-                <input id="nome" type="text" placeholder="Seu nome" />
+          <div class="hero-grid">
+            <div>
+              <div class="kicker">Gustavo Santos</div>
+              <h1>Consultor de BI &amp; Analytics</h1>
+              <div class="sublead">
+                Transformo dados complexos em <b>ativos</b> de decisão
+                <b>fundamentados</b>.
               </div>
-              <div class="field">
-                <label for="email">Email</label>
-                <input id="email" type="email" placeholder="seu@email.com" />
+              <p class="lead">
+                Capacito empresas a fundamentarem suas decisões em dados
+                estratégicos, substituindo a intuição por indicadores claros e
+                dashboards que otimizam a rotina de gestão.
+              </p>
+
+              <div class="cta-row">
+                <a class="btn btn-primary" href="#portfolio">Ver Projetos</a>
+                <a class="btn" href="#contato">Falar Comigo</a>
+                <a
+                  class="btn"
+                  href="https://instagram.com/gustavosantosanalytics"
+                  target="_blank"
+                  rel="noreferrer"
+                  >Instagram</a
+                >
+              </div>
+
+              <div class="chips">
+                <span class="chip"><b>Analytics</b> Visualização & BI</span>
+                <span class="chip"><b>Engenharia</b> SQL / Power Query</span>
+                <span class="chip"><b>KPI</b> Indicadores Governados</span>
+                <span class="chip"><b>Cultura</b> Gestão por Resultados</span>
               </div>
             </div>
 
-            <div class="field">
-              <label for="mensagem">Mensagem</label>
-              <textarea id="mensagem" placeholder="Conte rapidamente o seu desafio com dados..."></textarea>
+            <div class="method-card">
+              <h3>Entrega com Método</h3>
+              <p>
+                Diagnóstico → Indicadores → Modelagem → Dashboard → Validação →
+                Evolução. Rigor técnico e clareza para decisões seguras, sem
+                burocracia.
+              </p>
             </div>
+          </div>
 
-            <div class="form-actions">
-              <button class="btn btn-primary" type="button">Enviar Mensagem</button>
-              <a class="btn" href="https://wa.me/553171379432" target="_blank" rel="noreferrer">Preferir WhatsApp</a>
+          <div class="banner" aria-label="frase de impacto">
+            <span class="dot"></span>
+            <span><b>Inteligência Estratégica</b> Orientada a <b>Dados</b></span>
+          </div>
+
+          <div class="logo-row">
+            <div style="width: 100%">
+              <small>Experiências e referências corporativas</small>
+              <div class="logos">
+                <div class="logo-box"><img src="bmg.png" alt="BMG" /></div>
+                <div class="logo-box"><img src="gmt.png" alt="GMT" /></div>
+                <div class="logo-box"><img src="crono.png" alt="Crono" /></div>
+              </div>
             </div>
-          </form>
+          </div>
         </div>
-      </div>
-    </div>
-  </section>
+      </section>
 
-</main>
+      <section class="block" id="habilidades">
+        <div class="container">
+          <h2 class="section-title">Habilidades</h2>
+          <p class="section-desc">
+            Da imersão estratégica à inteligência de dados: ativos de decisão
+            fundamentados, consistentes e escaláveis.
+          </p>
 
-<footer>
-  <div class="container">
-    <div class="footer-row">
-      <div style="display:flex; align-items:center; gap:10px">
-        <img src="logo-gsa-white.png" alt="Logo Gustavo Santos Analytics">
-        <span>© <span id="year"></span> Gustavo Santos Analytics</span>
-      </div>
+          <div class="grid-3">
+            <div class="card">
+              <span class="tag">01</span>
+              <h4>Diagnóstico &amp; Mapeamento</h4>
+              <p>
+                Entendimento da necessidade, tradução de dores em KPIs e
+                alinhamento conceitual para garantir uma única fonte da verdade.
+              </p>
+            </div>
 
-      <div style="display:flex; gap:14px; flex-wrap:wrap">
-        <a href="https://bit.ly/gsa-linkedin" target="_blank" rel="noreferrer">LinkedIn</a>
-        <a href="https://instagram.com/gustavosantosanalytics" target="_blank" rel="noreferrer">Instagram</a>
-        <a href="mailto:gustavo@coutosantos.com">Email</a>
-        <a href="https://wa.me/553171379432" target="_blank" rel="noreferrer">WhatsApp</a>
-      </div>
-    </div>
-  </div>
-</footer>
+            <div class="card">
+              <span class="tag">02</span>
+              <h4>Engenharia &amp; Modelagem</h4>
+              <p>
+                Tratamento, padronização e estruturação lógica (SQL/ETL) com o
+                rigor da engenharia para garantir integridade técnica.
+              </p>
+            </div>
 
-<script>
-  document.getElementById('year').textContent = new Date().getFullYear();
+            <div class="card">
+              <span class="tag">03</span>
+              <h4>Analytics &amp; Adoção</h4>
+              <p>
+                Dashboards intuitivos focados em usabilidade, com documentação
+                de apoio e suporte para que o dado vire rotina de gestão.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
 
-  const hamb = document.getElementById('hamb');
-  const mobileMenu = document.getElementById('mobileMenu');
+      <section class="block" id="portfolio">
+        <div class="container">
+          <h2 class="section-title">Projetos</h2>
+          <p class="section-desc">
+            Explore alguns dos meus estudos de caso interativos desenvolvidos
+            para o cenário corporativo.
+          </p>
 
-  if (hamb && mobileMenu) {
-    hamb.addEventListener('click', () => {
-      const isOpen = mobileMenu.style.display === 'block';
-      mobileMenu.style.display = isOpen ? 'none' : 'block';
-    });
-  }
+          <div class="grid-3">
+            <div class="card proj-card">
+              <h4>Performance de Vendas &amp; Forecasting</h4>
+              <p class="section-desc" style="margin: 0 0 10px">
+                Visão executiva focada no crescimento e na previsibilidade de
+                receita.
+              </p>
+              <ul>
+                <li>Análise de Pareto (80/20) de produtos e clientes</li>
+                <li>Comparativos anuais (YoY) e mensais (MoM)</li>
+                <li>Projeção estatística de fechamento do faturamento</li>
+              </ul>
+              <div class="proj-actions">
+                <a class="btn btn-primary" href="#" aria-disabled="true"
+                  >Abrir Dashboard</a
+                >
+              </div>
+            </div>
 
-  // Fechar menu mobile ao clicar em um link
-  document.querySelectorAll('#mobileMenu a').forEach(a => {
-    a.addEventListener('click', () => {
-      mobileMenu.style.display = 'none';
-    });
-  });
-</script>
+            <div class="card proj-card">
+              <h4>Gestão Financeira &amp; Governança</h4>
+              <p class="section-desc" style="margin: 0 0 10px">
+                DRE automatizada e ecossistema de dados para controle de caixa
+                seguro.
+              </p>
+              <ul>
+                <li>Integração total: EBITDA, Fluxo de Caixa e Inadimplência</li>
+                <li>Comparativo Budget vs. Actual (Planejado vs. Realizado)</li>
+                <li>100% de integridade técnica e conciliação de saldos</li>
+              </ul>
+              <div class="proj-actions">
+                <a class="btn btn-primary" href="#" aria-disabled="true"
+                  >Abrir Dashboard</a
+                >
+              </div>
+            </div>
 
-</body>
+            <div class="card proj-card">
+              <h4>Engenharia de Obras &amp; Eficiência</h4>
+              <p class="section-desc" style="margin: 0 0 10px">
+                Monitoramento técnico de canteiro focado em produtividade e
+                custos.
+              </p>
+              <ul>
+                <li>Gestão baseada em Earned Value Management (EVM)</li>
+                <li>Controle de IDC (Custos), IDP (Prazos) e Desperdício</li>
+                <li>Produtividade HH comparada às médias de mercado</li>
+              </ul>
+              <div class="proj-actions">
+                <a class="btn btn-primary" href="#" aria-disabled="true"
+                  >Abrir Dashboard</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="block" id="sobre">
+        <div class="container">
+          <h2 class="section-title">Sobre</h2>
+          <p class="section-desc">
+            Atuo no desenvolvimento de soluções de Business Intelligence que
+            convertem desafios operacionais em ativos de decisão. Minha
+            trajetória une o rigor técnico da engenharia à clareza estratégica
+            da comunicação, entregando governança de dados para áreas como
+            Jurídico, Auditoria, Contabilidade e Engenharia Civil.
+          </p>
+
+          <div class="about-grid">
+            <div class="card">
+              <h4 style="margin: 0 0 10px">O que você pode esperar</h4>
+              <ul class="bullets">
+                <li>
+                  <b>Diagnóstico Estratégico:</b> Imersão real para entender o
+                  problema e gerar impacto imediato.
+                </li>
+                <li>
+                  <b>Integridade de Dados:</b> Indicadores consistentes com
+                  regras de cálculo homologadas.
+                </li>
+                <li>
+                  <b>Fluxo Pragmatico:</b> Estruturas ágeis focadas em
+                  transformar dados em insights e decisão.
+                </li>
+                <li>
+                  <b>Sustentabilidade:</b> Documentação e suporte técnico para
+                  manter a inteligência viva.
+                </li>
+              </ul>
+            </div>
+
+            <div class="pill-stack">
+              <div class="pill"><b>3 anos</b> consultoria BI em grupo de grande porte</div>
+              <div class="pill"><b>Alta Performance</b> foco em estruturas enxutas e escaláveis</div>
+              <div class="pill"><b>ETL</b> SQL / Power Query / Python</div>
+              <div class="pill"><b>BI</b> Power BI (Modelagem complexa + DAX)</div>
+              <div class="pill"><b>Rotina</b> Gestão por resultados baseada em evidências</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="block" id="contato">
+        <div class="container">
+          <h2 class="section-title">Contato</h2>
+          <p class="section-desc">
+            Pronto para transformar sua gestão com inteligência de dados? Vamos
+            conversar.
+          </p>
+
+          <div class="contact-grid">
+            <div class="contact-list">
+              <div class="item">
+                <span>WhatsApp Business</span>
+                <small>wa.me/553171379432</small>
+              </div>
+              <div class="item">
+                <span>Email</span>
+                <small>gustavo@coutosantos.com</small>
+              </div>
+              <div class="item">
+                <span>LinkedIn</span>
+                <small>bit.ly/gsa-linkedin</small>
+              </div>
+              <div class="item">
+                <span>Instagram</span>
+                <small>@gustavosantosanalytics</small>
+              </div>
+            </div>
+
+            <form
+              action="https://formsubmit.co/gustavo@coutosantos.com"
+              method="POST"
+            >
+              <input type="hidden" name="_subject" value="Contato - GSA Site" />
+              <input type="hidden" name="_captcha" value="false" />
+
+              <div class="field-row">
+                <input name="name" placeholder="Nome" required />
+                <input name="email" placeholder="Email" type="email" required />
+              </div>
+              <textarea
+                name="message"
+                placeholder="Mensagem"
+                required
+              ></textarea>
+
+              <div class="form-actions">
+                <button class="btn btn-primary" type="submit">
+                  Enviar Mensagem
+                </button>
+                <a
+                  class="btn"
+                  href="https://wa.me/553171379432"
+                  target="_blank"
+                  rel="noreferrer"
+                  >Preferir WhatsApp</a
+                >
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <div class="container">
+          <div class="footer-row">
+            <div style="display: flex; align-items: center; gap: 10px">
+              <span>© <span id="year">2026</span> Gustavo Santos Analytics</span>
+            </div>
+            <div style="display: flex; gap: 14px; flex-wrap: wrap">
+              <a
+                href="https://bit.ly/gsa-linkedin"
+                target="_blank"
+                rel="noreferrer"
+                >LinkedIn</a
+              >
+              <a
+                href="https://instagram.com/gustavosantosanalytics"
+                target="_blank"
+                rel="noreferrer"
+                >Instagram</a
+              >
+              <a href="mailto:gustavo@coutosantos.com">Email</a>
+              <a
+                href="https://wa.me/553171379432"
+                target="_blank"
+                rel="noreferrer"
+                >WhatsApp</a
+              >
+            </div>
+          </div>
+        </div>
+      </footer>
+    </main>
+
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      const hamb = document.getElementById("hamb");
+      const mobileMenu = document.getElementById("mobileMenu");
+      if (hamb) {
+        hamb.addEventListener("click", () =>
+          mobileMenu.classList.toggle("open")
+        );
+      }
+
+      document.querySelectorAll('a[href^="#"]').forEach((a) => {
+        a.addEventListener("click", (e) => {
+          const href = a.getAttribute("href");
+          if (!href || href === "#") return;
+          const el = document.querySelector(href);
+          if (!el) return;
+          e.preventDefault();
+          mobileMenu.classList.remove("open");
+          el.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      });
+    </script>
+  </body>
 </html>
