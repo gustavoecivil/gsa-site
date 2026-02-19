@@ -83,21 +83,19 @@
        3) NAVEGAÇÃO “MAIS PRA DIREITA” (dentro do hero), sem ocupar toda a largura
     */
     .hero-logo{
-      position:absolute;
-      top: 110px;         /* AJUSTE FINO AQUI se quiser mais pra cima/baixo */
-      left: 44px;         /* AJUSTE FINO AQUI se quiser mais pra esquerda/direita */
-      z-index:3;
-      display:flex;
-      align-items:flex-start;
-      gap:12px;
-      pointer-events:none; /* logo não “atrapalha” clique */
-    }
-    .hero-logo img{
-      width: 132px;       /* tamanho da marca */
-      height: auto;
-      display:block;
-      filter: drop-shadow(0 10px 22px rgba(0,0,0,.55));
-    }
+  position: absolute;
+  top: 55px;     /* sobe a marca */
+  left: 26px;    /* ajusta a posição horizontal */
+  z-index: 6;
+  opacity: .98;
+  pointer-events: none;
+}
+.hero-logo img{
+  width: 150px;  /* tamanho da marca */
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 10px 24px rgba(0,0,0,.55));
+}
 
     /* NAV “solta” no topo, mais à direita */
     .top-nav{
@@ -856,3 +854,4 @@
   </script>
 </body>
 </html>
+
