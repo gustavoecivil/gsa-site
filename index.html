@@ -24,7 +24,7 @@
     }
 
     *{box-sizing:border-box}
-    html,body{height:100%}
+    html{height:100%; overflow-x:hidden;}
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Helvetica Neue", "Noto Sans", "Liberation Sans", sans-serif;
@@ -33,26 +33,16 @@
         radial-gradient(900px 520px at 80% 20%, rgba(201,162,39,.08), transparent 58%),
         var(--bg);
       color:var(--text);
-      overflow-x:hidden;
     }
 
     a{color:inherit; text-decoration:none}
     .container{max-width:var(--max); margin:0 auto; padding:0 22px}
 
-    /* Compensa a altura do header fixo */
-    main{ padding-top: 62px; }
-
     /* ===== Header ===== */
     header{
-      position:fixed;
-      top:0;
-      left:0;
-      right:0;
-      z-index:50;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      background: linear-gradient(to bottom, rgba(10,14,20,.72), rgba(10,14,20,.42));
-      border-bottom:1px solid var(--line2);
+      position:static;
+      background: transparent;
+      border-bottom: none;
     }
 
     .nav{
@@ -168,10 +158,7 @@
 
     /* ===== LOGO SOLTA NO TOPO ESQUERDO (fora do header) ===== */
     .hero-logo{
-      position:fixed;
-      top: 8px;
-      left: 140px;
-      z-index: 200;    /* acima do header (z-index: 50) */
+      position:static;
       display:inline-flex;
       align-items:center;
     }
