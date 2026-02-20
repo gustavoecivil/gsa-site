@@ -50,7 +50,7 @@
       align-items:center;
       justify-content:space-between;
       gap:18px;
-      padding:14px 0;
+      padding:6px 0;
     }
 
     .menu{
@@ -158,12 +158,12 @@
 
     /* ===== LOGO SOLTA NO TOPO ESQUERDO (fora do header) ===== */
     .hero-logo{
-      position:static;
       display:inline-flex;
       align-items:center;
+      flex-shrink:0;
     }
     .hero-logo img{
-      width: 140px;
+      width: 120px;
       height: auto;
       display:block;
       filter: drop-shadow(0 10px 28px rgba(0,0,0,.60));
@@ -609,16 +609,13 @@
 
 <body>
 
-<!-- LOGO FIXA SOBRE O HEADER -->
-<a class="hero-logo" href="#topo" aria-label="Gustavo Santos Analytics">
-  <img src="logo-gsa-white.png" alt="Gustavo Santos Analytics">
-</a>
-
 <header>
   <div class="container">
     <div class="nav">
-      <!-- espaçador à esquerda para manter o menu centralizado -->
-      <div style="min-width:260px"></div>
+      <!-- LOGO À ESQUERDA -->
+      <a class="hero-logo" href="#topo" aria-label="Gustavo Santos Analytics">
+        <img src="logo-gsa-white.png" alt="Gustavo Santos Analytics">
+      </a>
 
       <!-- MENU CENTRAL -->
       <nav class="menu" aria-label="Menu principal">
