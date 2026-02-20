@@ -164,8 +164,8 @@
     /* ===== LOGO SOLTA NO TOPO ESQUERDO (fora do header) ===== */
     .hero-logo{
       position:absolute;
-      top: 18px;       /* MAIS ALTA (não encosta no H1) */
-      left: 26px;      /* um pouco mais à direita */
+      top: 6px;        /* bem no topo */
+      left: 80px;      /* mais à direita */
       z-index: 60;
       display:inline-flex;
       align-items:center;
@@ -869,7 +869,7 @@
 
           <div class="contact-item">
             <span>Email</span>
-            <small><a href="mailto:gustavo@coutosantos.com">gustavo@coutosantos.com</a></small>
+            <small><a href="/cdn-cgi/l/email-protection#adcad8ded9ccdbc2edcec2d8d9c2deccc3d9c2de83cec2c0"><span class="__cf_email__" data-cfemail="2d4a585e594c5b426d4e425859425e4c4359425e034e4240">[email&#160;protected]</span></a></small>
           </div>
 
           <div class="contact-item">
@@ -924,14 +924,14 @@
       <div style="display:flex; gap:14px; flex-wrap:wrap">
         <a href="https://bit.ly/gsa-linkedin" target="_blank" rel="noreferrer">LinkedIn</a>
         <a href="https://instagram.com/gustavosantosanalytics" target="_blank" rel="noreferrer">Instagram</a>
-        <a href="mailto:gustavo@coutosantos.com">Email</a>
+        <a href="/cdn-cgi/l/email-protection#90f7e5e3e4f1e6ffd0f3ffe5e4ffe3f1fee4ffe3bef3fffd">Email</a>
         <a href="https://wa.me/553171379432" target="_blank" rel="noreferrer">WhatsApp</a>
       </div>
     </div>
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   document.getElementById('year').textContent = new Date().getFullYear();
 
   const hamb = document.getElementById('hamb');
@@ -939,17 +939,4 @@
 
   if (hamb && mobileMenu) {
     hamb.addEventListener('click', () => {
-      const isOpen = mobileMenu.style.display === 'block';
-      mobileMenu.style.display = isOpen ? 'none' : 'block';
-    });
-  }
-
-  document.querySelectorAll('#mobileMenu a').forEach(a => {
-    a.addEventListener('click', () => {
-      mobileMenu.style.display = 'none';
-    });
-  });
-</script>
-
-</body>
-</html>
+      const isOpen = mobileMe
