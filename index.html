@@ -163,10 +163,10 @@
 
     /* ===== LOGO SOLTA NO TOPO ESQUERDO (fora do header) ===== */
     .hero-logo{
-      position:absolute;
-      top: 6px;        /* bem no topo */
-      left: 80px;      /* mais à direita */
-      z-index: 60;
+      position:fixed;
+      top: 8px;
+      left: 80px;
+      z-index: 200;    /* acima do header (z-index: 50) */
       display:inline-flex;
       align-items:center;
     }
@@ -600,8 +600,8 @@
       .hamb{display:inline-flex}
       .mobile-menu{display:block}
       .nav-cta{min-width: auto}
-      .hero-logo{ top: 14px; left: 16px; }
-      .hero-logo img{ width: 120px; }
+      .hero-logo{ top: 8px; left: 16px; }
+      .hero-logo img{ width: 110px; }
     }
 
     @media (max-width: 520px){
@@ -616,6 +616,11 @@
 </head>
 
 <body>
+
+<!-- LOGO FIXA SOBRE O HEADER -->
+<a class="hero-logo" href="#topo" aria-label="Gustavo Santos Analytics">
+  <img src="logo-gsa-white.png" alt="Gustavo Santos Analytics">
+</a>
 
 <header>
   <div class="container">
@@ -659,11 +664,6 @@
   <!-- HERO -->
   <section class="hero">
     <div class="hero-bg" aria-hidden="true"></div>
-
-    <!-- LOGO SOLTA NO TOPO ESQUERDO -->
-    <a class="hero-logo" href="#topo" aria-label="Gustavo Santos Analytics">
-      <img src="logo-gsa-white.png" alt="Gustavo Santos Analytics">
-    </a>
 
     <div class="container hero-inner">
       <div class="grid-hero">
