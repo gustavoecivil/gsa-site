@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://gustavoecivil.github.io/gsa-site/sitemap.xml
