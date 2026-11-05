@@ -215,6 +215,87 @@
     return svg;
   }
 
+  /* ---------------- Gráficos do topo das páginas ---------------- */
+  $$('[data-chart]').forEach((root) => {
+    const spec = JSON.parse(root.dataset.chart);
+    const NS = 'http://www.w3.org/2000/svg';
+    const tip = h('div', { class: 'viz-tip', 'aria-hidden': 'true' });
+    const mk = (parent, n, a = {}, t) => { const e = document.createElementNS(NS, n); for (const k in a) e.setAttribute(k, a[k]); if (t != null) e.textContent = t; parent.append(e); return e; };
+    const brl = (v) => `R$ ${v} mil`;
+    let first = !reduced, lastW = 0;
+
+    const draw = () => {
+      const W = root.clientWidth, H = root.clientHeight;
+      if (!W || !H || W === lastW) return;
+      lastW = W;
+      root.classList.toggle('is-first', first);
+      const svg = document.createElementNS(NS, 'svg');
+      svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+      svg.setAttribute('aria-hidden', 'true');
+      const P = { l: 30, r: spec.type === 'bars' ? 8 : 64, t: 26, b: 26 };
+      const min = spec.type === 'bars' ? 0 : spec.min;
+      const y = (v) => P.t + (1 - (v - min) / (spec.max - min)) * (H - P.t - P.b);
+      spec.ticks.forEach((t) => { mk(svg, 'line', { class: 'grid', x1: P.l, x2: W - P.r, y1: y(t), y2: y(t) }); mk(svg, 'text', { x: P.l - 8, y: y(t) + 4, 'text-anchor': 'end' }, t); });
+      const n = spec.months.length, band = (W - P.l - P.r) / n, cx = (i) => P.l + band * i + band / 2;
+      const every = band < 30 ? 2 : 1;
+      spec.months.forEach((m, i) => { if ((n - 1 - i) % every === 0) mk(svg, 'text', { x: cx(i), y: H - 6, 'text-anchor': 'middle' }, m); });
+      const hits = [];
+
+      if (spec.type === 'bars') {
+        const bw = Math.min(24, band - 2), r = 4, base = y(0);
+        const bars = spec.values.map((v, i) => {
+          const x = cx(i) - bw / 2, top = y(v);
+          const b = mk(svg, 'path', { class: `bar${i === n - 1 ? ' now' : ''}`, d: `M${x},${base}V${top + r}Q${x},${top} ${x + r},${top}H${x + bw - r}Q${x + bw},${top} ${x + bw},${top + r}V${base}Z` });
+          b.style.animationDelay = `${i * 35}ms`;
+          return b;
+        });
+        const ty = y(spec.target);
+        mk(svg, 'line', { class: 'refline', x1: P.l, x2: W - P.r, y1: ty, y2: ty });
+        mk(svg, 'text', { x: P.l + 4, y: ty - 7, class: 'strong' }, `Meta: ${brl(spec.target)}`);
+        const last = spec.values[n - 1];
+        mk(svg, 'text', { x: Math.min(cx(n - 1), W - P.r - 30), y: y(last) - 8, 'text-anchor': 'middle', class: 'strong' }, brl(last));
+        spec.values.forEach((v, i) => {
+          const d = v - spec.target;
+          hits.push({ i, x: cx(i), y: y(v), html: `<b>${spec.months[i]}: ${brl(v)}</b>${d === 0 ? 'Na meta' : `${d > 0 ? '+' : '−'}R$ ${Math.abs(d)} mil em relação à meta`}`, on: () => { root.classList.add('has-hover'); bars[i].classList.add('hot'); }, off: () => { root.classList.remove('has-hover'); bars[i].classList.remove('hot'); } });
+        });
+      } else {
+        const a = spec.actual.length, ai = a - 1, f = spec.forecast;
+        const area = [[cx(ai), y(spec.actual[ai])], ...f.map((_, j) => [cx(a + j), y(spec.high[j])]), ...f.map((_, j) => [cx(a + f.length - 1 - j), y(spec.low[f.length - 1 - j])])];
+        mk(svg, 'path', { class: 'band', d: `M${area.map((p) => p.join(',')).join('L')}Z` });
+        mk(svg, 'path', { class: 'line', d: `M${spec.actual.map((v, i) => `${cx(i)},${y(v)}`).join('L')}` });
+        mk(svg, 'path', { class: 'line proj', d: `M${cx(ai)},${y(spec.actual[ai])}L${f.map((v, j) => `${cx(a + j)},${y(v)}`).join('L')}` });
+        mk(svg, 'circle', { class: 'dot', cx: cx(ai), cy: y(spec.actual[ai]), r: 5 });
+        mk(svg, 'circle', { class: 'dot', cx: cx(n - 1), cy: y(f[f.length - 1]), r: 5 });
+        mk(svg, 'text', { x: cx(ai), y: y(spec.actual[ai]) - 12, 'text-anchor': 'end', class: 'strong' }, brl(spec.actual[ai]));
+        mk(svg, 'text', { x: cx(n - 1) + 10, y: y(f[f.length - 1]) + 4, class: 'strong' }, brl(f[f.length - 1]));
+        const cross = mk(svg, 'line', { class: 'cross', y1: P.t, y2: H - P.b, opacity: 0 });
+        spec.months.forEach((m, i) => {
+          const isF = i >= a, j = i - a, v = isF ? f[j] : spec.actual[i];
+          hits.push({ i, x: cx(i), y: y(v), html: `<b>${m}: ${brl(v)}</b>${isF ? `Projeção · faixa de R$ ${spec.low[j]} a ${spec.high[j]} mil` : 'Realizado'}`, on: () => { cross.setAttribute('x1', cx(i)); cross.setAttribute('x2', cx(i)); cross.setAttribute('opacity', 1); }, off: () => cross.setAttribute('opacity', 0) });
+        });
+      }
+
+      // Área de toque maior que a marca: a coluna inteira de cada mês.
+      hits.forEach((t) => {
+        const r = mk(svg, 'rect', { class: 'hit', x: t.x - band / 2, y: 0, width: band, height: H });
+        const show = () => { t.on(); tip.innerHTML = t.html; tip.style.left = `${Math.max(90, Math.min(W - 90, t.x))}px`; tip.style.top = `${Math.max(46, t.y - 10)}px`; tip.classList.add('on'); };
+        const hide = () => { t.off(); tip.classList.remove('on'); };
+        r.addEventListener('pointerenter', show);
+        r.addEventListener('pointerdown', show);
+        r.addEventListener('pointerleave', hide);
+      });
+      root.replaceChildren(svg, tip);
+      if (first) setTimeout(() => root.classList.remove('is-first'), 1400);
+      first = false;
+    };
+
+    if (spec.type === 'forecast') {
+      root.after(h('p', { class: 'viz-legend' }, h('span', {}, h('i'), 'Realizado'), h('span', {}, h('i', { class: 'proj' }), 'Projeção'), h('span', {}, h('i', { class: 'band' }), 'Faixa provável')));
+    }
+    draw();
+    new ResizeObserver(draw).observe(root);
+  });
+
   /* ---------------- Experiência 1 — Converse com seu negócio ---------------- */
   $$('[data-xp="ask"]').forEach((root) => {
     const items = data(root.dataset.source); if (!items) return;
