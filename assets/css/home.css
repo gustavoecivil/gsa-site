@@ -1,0 +1,85 @@
+/* GSA — complementos da home (usa os tokens de gsa.css) */
+.trust{border-top:1px solid var(--linha-escura);border-bottom:1px solid var(--linha-escura);background:var(--carvao)}
+.trust-row{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr)}
+.trust-row li{padding:24px 24px 24px 0;display:flex;flex-direction:column;gap:10px}
+.trust-row li+li{padding-left:24px;border-left:1px solid var(--linha-escura)}
+.trust-row .mono{color:var(--ouro-claro)}
+.trust-row b{font-family:var(--f-display);font-weight:400;font-size:1.18rem;line-height:1.25}
+
+/* clientes */
+.client-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:16px}
+.client-card{margin:0;grid-column:span 2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;min-height:200px;padding:22px;background:#fff;border:1px solid var(--marfim-3);border-radius:6px;text-align:center}
+.client-logo{display:flex;align-items:center;justify-content:center;width:100%;height:90px}
+.client-logo img{width:auto;max-width:90%;max-height:84px;object-fit:contain}
+.client-card figcaption{font-weight:600;font-size:.95rem;color:var(--tinta)}
+.client-context{font-size:.78rem;color:#6b645a}
+.client-link{font-size:.78rem;color:var(--ouro-fosco);text-decoration:underline;text-underline-offset:4px}
+.client-group{grid-column:1/-1;margin:0;background:#fff;border:1px solid var(--marfim-3);border-radius:6px;padding:24px 28px;display:grid;grid-template-columns:1fr 2fr;align-items:center;gap:24px}
+.client-group h3{font-family:var(--f-display);font-weight:400;font-size:clamp(1.5rem,1.2rem + 1vw,2.1rem);margin:6px 0;color:var(--tinta)}
+.client-group .mono{color:var(--ouro-fosco)}
+.client-brands{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+.client-brand{margin:0;display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px}
+.client-brand:first-child{border-right:1px solid var(--marfim-2);padding-right:18px}
+.client-brand figcaption{font-size:.85rem;color:#453f36}
+.client-note{margin-top:22px;color:#635d54;font-size:.78rem;max-width:85ch}
+
+/* outras frentes */
+.frentes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--linha-escura);border:1px solid var(--linha-escura)}
+.frente{background:var(--carvao);padding:clamp(24px,3vw,40px);display:flex;flex-direction:column;gap:16px}
+.frente .mono{color:var(--ouro-claro)}
+.frente h3{font-family:var(--f-display);font-weight:400;font-size:clamp(1.6rem,1.2rem + 1.2vw,2.3rem);line-height:1.1;letter-spacing:-.02em;margin:0}
+.frente h3 em{color:var(--ouro-claro);font-style:normal}
+.frente p{color:var(--cinza-claro);margin:0}
+.frente .fine{font-size:.8rem;color:var(--cinza)}
+.frente .btn{align-self:flex-start;margin-top:auto}
+
+/* fundador */
+.founder{display:grid;grid-template-columns:minmax(200px,.7fr) 1.3fr;align-items:center;gap:clamp(30px,6vw,90px)}
+.founder figure{margin:0;max-width:420px}
+.founder figure img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center 25%;background:var(--marfim-2);border-radius:4px}
+.founder figcaption{margin-top:12px;color:var(--cinza-escuro)}
+.founder .body-copy{margin-bottom:16px}
+.founder .actions{margin-top:24px}
+
+/* patrocínio */
+.sponsor-in{display:flex;align-items:center;justify-content:space-between;gap:28px;flex-wrap:wrap}
+.sponsor-t{max-width:70ch;margin:8px 0 0;color:#4a4b4c}
+
+@media(max-width:900px){
+  .trust-row{grid-template-columns:repeat(2,1fr)}
+  .trust-row li:nth-child(3){padding-left:0;border-left:0}
+  .trust-row li:nth-child(n+3){border-top:1px solid var(--linha-escura)}
+  .frentes{grid-template-columns:1fr}
+  .founder{grid-template-columns:1fr}
+}
+@media(max-width:720px){
+  .client-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .client-card{grid-column:span 1;min-height:160px;padding:16px 10px}
+  .client-group{grid-template-columns:1fr;padding:20px}
+  .client-logo{height:74px}
+  .client-logo img{max-height:68px}
+}
+@media(max-width:520px){
+  .trust-row{grid-template-columns:1fr}
+  .trust-row li,.trust-row li+li{padding:18px 0;border-left:0}
+  .trust-row li+li{border-top:1px solid var(--linha-escura)}
+}
+
+/* analytics autônomo */
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--linha-escura);border:1px solid var(--linha-escura);margin-bottom:32px}
+.vs-col{background:var(--carvao);padding:clamp(24px,3vw,40px)}
+.vs-col .mono{color:var(--cinza);display:block;margin-bottom:18px}
+.vs-new .mono{color:var(--ouro-claro)}
+.vs-col ul{list-style:none;margin:0;padding:0}
+.vs-col li{padding:12px 0 12px 22px;border-top:1px solid var(--linha-escura);position:relative;color:var(--cinza-claro)}
+.vs-old li::before{content:"×";position:absolute;left:0;color:var(--alerta)}
+.vs-new li::before{content:"✓";position:absolute;left:0;color:var(--ok)}
+.vs-new li{color:var(--marfim)}
+.vs-note{margin:28px 0;font-family:var(--f-display);font-size:clamp(1.15rem,1rem + .6vw,1.5rem);max-width:60ch;color:var(--marfim)}
+#autonomo .pillars{margin-top:0}
+@media(max-width:800px){.vs{grid-template-columns:1fr}}
+
+/* teaser do laboratório */
+.lab-teaser{margin-top:32px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;padding:24px 28px;border:1px solid var(--linha-escura);border-radius:6px;background:var(--carvao)}
+.lab-teaser .mono{color:var(--ouro-claro);display:block;margin-bottom:8px}
+.lab-teaser p{margin:0;max-width:62ch;color:var(--cinza-claro)}
